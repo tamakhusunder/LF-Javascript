@@ -38,7 +38,36 @@ header{
     width: 100%;
     height: 100%;
 }
-
+.use{
+    background: url("../images/Rectangle 15.png");
+    width: 100%;
+    height: 100%;
+}
+.team{
+    width: 100%;
+    height: 100%;
+    /* background-color: rgb(115, 236, 125); */
+    text-align: center;
+    padding-bottom:3%;
+}
+.customer{
+    background: url("../images/Rectangle 14 (1).png");
+    width: 100%;
+    height: 100%;
+    color: #FFFFFF;
+    padding-top:3% ;
+    padding-bottom:3%;
+    text-align: center;
+}
+footer{
+    background: url("../images/Rectangle 35.png");
+    width: 100%;
+    height: 100%;
+    color: #FFFFFF;
+    padding-top:3% ;
+    padding-bottom:3%;
+    text-align: center;
+}
 
 /* ****************************************** */
 /* media query css */
