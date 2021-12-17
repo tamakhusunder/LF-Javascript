@@ -1,0 +1,41 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;600&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
+h1{
+    font-size: 48.83px;
+}
+h2{
+    font-size: 31.25px;
+}
+h3{
+    font-weight: 600;
+    font-size: 25px;
+}
+h4{
+    font-weight: 600;
+    font-size: 20px;
+}
+p{
+    font-size: 16px;
+}
+
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+  
+.clearfix:after {
+    content: '';
+    clear: both;
+    display: table;
+}

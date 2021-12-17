@@ -1,0 +1,413 @@
+/* ****************************************** */
+/* header container css */
+/* ****************************************** */
+
+/* mobile header css */
+ 
+.nav-mobile{
+    background-color: #FFFFFF;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: #232233;
+}
+
+.nav-mobile-left{
+    float: left;
+    padding-left: 12px;
+    padding-bottom: 12px;
+    padding-top: 12px;
+}
+.nav-mobile-right{
+    float: right;
+    background: #5956E9;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    padding-right: 12px;
+    padding-left: 12px;
+    margin-top: 4px;
+    margin-right: 4px;
+    font-weight: 600;
+    font-size: 10px;
+    background: #5956E9;
+    border-radius: 3px;
+}
+.mobile-logo{
+    /* background-color: rgb(43, 226, 58); */
+    margin-top: -29px;
+    /* height: 100%; */
+}
+#mobile-logo-block{
+    background-color: rgb(131, 124, 124);
+    padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 20px;
+    margin-left: 30%;
+    /* margin:0 auto; */
+    background: #FFFFFF;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+
+.banner{
+    /* background-color: rgb(170, 158, 158); */
+    margin-top: 10%;
+}
+.banner-left{
+    float: left;
+    /* background-color: brown; */
+    width: 100%;
+    /* margin-left: 16px; */
+}
+.banner-right{
+    float: left;
+    /* background-color: rgb(124, 235, 34); */
+    overflow: hidden;
+    width: 100%;
+}
+.banner-right img{
+    width: 100%;
+}
+.banner-sqbox{
+    /* padding: 32px; */
+    padding-right: 32px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    /* background: #C4C4C4; */
+    border: 10px solid #7572FF;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.banner-textbox{
+    padding: 18px;
+    background-color: rgb(78, 218, 23);
+}
+.banner-textbox h1{
+    color: #5956E9;
+    font-style: normal;
+    font-size: 48.83px;
+    font-weight: bold;
+}
+.banner-textbox p{
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    
+}
+.banner-playstore,.banner-applestore{
+    float: left;
+}
+
+
+
+
+/* ****************************************** */
+/* css for about page */
+.about-last-left,.about-last-right{
+    float: left;
+    width: 100%;
+}
+.about-last-left img{
+    width:100%
+}
+
+/* ****************************************** */
+/* css for feature page */
+.feature-display-center{
+    width: 100%;
+    /*margin: 0 auto;
+    overflow: hidden;
+    background: url("../images/App.png");
+    background-repeat: no-repeat; */
+}
+
+
+/* ****************************************** */
+/* css for interface page */
+
+.interface h2{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.interface p{
+    color:#6C6C72;
+}
+.dots-slider{
+    width: 100%;
+    background-color: aqua;
+}
+.dots-slider span{
+   margin: 0 auto;
+}
+/* ****************************************** */
+/* css for use page */
+
+/* ****************************************** */
+/* css for team page */
+
+/* ****************************************** */
+/* css for customer page */
+
+/* ****************************************** */
+/* css for blog page */
+
+/* ****************************************** */
+/* css for footer page */
+
+/* ****************************************** */
+/* display block of desktop */
+.nav-hide-for-mobile,.nav-hide-for-mobile-and-tablet,.feature-only-for-desktop-tablet{
+    display: none;
+}
+
+
+
+/* ****************************************** */
+/* media query for laptop */
+/* ****************************************** */
+
+/* media query header */
+@media only screen and (min-width: 768px) {
+    
+
+    .nav-hide-for-mobile-and-tablet,.feature-only-for-mobile{
+        display: none;
+    }
+    .nav-hide-for-mobile,.feature-only-for-desktop-tablet{
+        display: block;
+    }
+    .nav-top{
+        padding-top: 38px;;
+        color: #FFFFFF;
+        /* background-color: rgb(197, 189, 189); */
+    }
+    .nav-top-email{
+        float:left;
+    }
+    .nav-top-contact{
+        float:left;
+        margin-left: 50px;
+
+    }
+    .nav-top-icon{
+        float:right;
+        margin-right: 10px;
+        
+    }
+    .nav-top-email svg,.nav-top-contact svg{
+        margin-right:20px;
+    }
+    .nav-top-icon svg{
+        margin-left:31.5px ;
+    }
+
+
+    #mobile-logo-block{
+        margin-left: 36%;
+        /* margin: 0 auto; */
+    }
+    
+    .banner{
+        /* background-color: rgb(170, 158, 158); */
+        /* margin-top: 234px; */
+        margin-top: 20%;
+        /* margin-bottom: 20%; */
+    }
+    .banner-left{
+        /* background-color: brown; */
+        width: 50%;
+    }
+    .banner-right{
+        /* background-color: rgb(124, 235, 34); */
+        width: 50%;
+    }
+
+    /* ****************************************** */
+    /* media query for about page */
+
+
+    .about-last-left,.about-last-right{
+    
+        width: 50%;
+    }
+
+    /* ****************************************** */
+    /* media query for feature page */
+    .feature-dispaly-left{
+        float:left;
+        background-color: aquamarine;
+        width: 25%;
+    }
+    .feature-dispaly-center{
+        float:left;
+        background-color: rgb(153, 91, 235);
+        width: 50%;
+    }
+    .feature-dispaly-left{
+        float:left;
+        background-color: rgb(115, 236, 125);
+        width: 25%;
+    }
+
+    /* ****************************************** */
+    /* media query for interface page */
+
+    /* ****************************************** */
+    /* media query for use page */
+
+    /* ****************************************** */
+    /* media query for team page */
+
+    /* ****************************************** */
+    /* media query for customer page */
+
+    /* ****************************************** */
+    /* media queryfor blog page */
+
+    /* ****************************************** */
+    /* media query for footer page */
+        
+
+}
+
+
+
+/* ****************************************** */
+/* media query for desktop */
+/* ****************************************** */
+@media only screen and (min-width: 1200px) {
+/* desktop header css */
+/* media query header */
+    .nav-hide-for-mobile-and-tablet{
+        display: block;
+    }
+    .mobile-navbar{
+        display: none;
+    }
+
+    .nav-top{
+        padding-top: 38px;;
+        color: #FFFFFF;
+        /* background-color: rgb(197, 189, 189); */
+    }
+    .nav-top-email{
+        float:left;
+    }
+    .nav-top-contact{
+        float:left;
+        margin-left: 50px;
+
+    }
+    .nav-top-icon{
+        float:right;
+        margin-right: 10px;
+        
+    }
+    .nav-top-email svg,.nav-top-contact svg{
+        margin-right:20px;
+    }
+    .nav-top-icon svg{
+        margin-left:31.5px ;
+    }
+
+    .nav .nav-left{
+        float: left;
+    }
+    .nav .nav-right{
+        float:right;
+    }
+    .nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    .nav ul li{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        float: left;
+        /* background-color: crimson; */
+    }
+    .nav-left ul li {
+        margin-right: 40px;
+    }
+    .nav-left ul li:first-child{
+        margin-left: 52px;
+    }
+    .nav-right ul li{
+        margin-left: 40px;
+        /* background-color: cyan; */
+        /* height: 100%; */
+    }
+
+    .nav a{
+        color: #232233;
+    }
+    .nav a:hover{
+        color: #5956E9;
+    }
+    .nav-right li:last-child{
+        display: block;
+        background: #5956E9;
+        border-radius: 5px;
+        padding:15px 15px 15px 15px;
+        margin-top: 5px;
+        text-align: center;
+        color: white;
+        font-weight: 600;
+        margin-right: 5px;
+
+    }
+    .logo{
+        margin-top:-75px;
+    }
+
+    .logo span{
+        display: table;
+        margin: 0 auto;
+        background-color: #FFFFFF;
+        padding-top: 31px;
+        padding-bottom: 31px;
+        padding-left: 16px;
+        padding-right: 17px;
+        box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+
+    }
+
+    .banner{
+        /* background-color: rgb(170, 158, 158); */
+        margin-top: 90px;
+    }
+
+    /* ****************************************** */
+    /* media query for feature page */
+
+
+    /* ****************************************** */
+    /* media query for interface page */
+
+    /* ****************************************** */
+    /* media query for use page */
+
+    /* ****************************************** */
+    /* media query for team page */
+
+    /* ****************************************** */
+    /* media query for customer page */
+
+    /* ****************************************** */
+    /* media queryfor blog page */
+
+    /* ****************************************** */
+    /* media query for footer page */
+        
+
+    /* hidden display part */
+    .desktop-nav{
+        display: block;
+    }
+
+}
+
