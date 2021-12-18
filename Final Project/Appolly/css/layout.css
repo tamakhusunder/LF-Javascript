@@ -16,6 +16,7 @@ header{
     /* object-fit: cover; */
     width: 100%;
     height: 100%;
+    padding-bottom: 3%;
     
 }
 .mobile-navbar{
@@ -26,17 +27,27 @@ header{
     /* background-color: #FFFFFF;    object-fit: cover; */
     width: 100%;
     height: 100%;
+    padding-top:5% ;
+    padding-bottom: 4%;
+    text-align: center;
 }
 .feature{
     background: url("../images/Background Image.png");
     /* object-fit: cover; */
     width: 100%;
     height: 100%;
+    padding-top:5% ;
+    padding-bottom: 4%;
+    text-align: center;
+    color: #FFFFFF;
 }
 .interface{
     /* background-color: #FFFFFF;    object-fit: cover; */
     width: 100%;
     height: 100%;
+    padding-top:5% ;
+    padding-bottom: 4%;
+    text-align: center;
 }
 .use{
     background: url("../images/Rectangle 15.png");
