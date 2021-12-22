@@ -69,6 +69,8 @@ for (let i=0; i<obj1.education.length;i++){
 
 */
 
+/*
+
 // 3.--------------------(objects) searches object by key in array---
 //Write a function that searches for an object by a specific key value in an array of objects:
 
@@ -120,3 +122,112 @@ console.log("------------")
 
 let s_keyvalue=searchByKey(fruits,'names','banana');
 console.log(s_keyvalue);
+
+*/
+
+/*
+
+//4.----------function(without map)(Write a function that transforms an array of inputs into a new array based on a provided transformation function.)---
+ 
+var numbers = [1,2,3,4];
+
+function transform(collection,tranFunc){
+    let arr=[],a;
+    collection.forEach((val) =>{
+        a=tranFunc(val);
+        arr.push(a);
+    });
+    return arr;
+    
+}
+
+var output=transform(numbers,function(num){
+    return num*2;
+});
+console.log(output);
+
+*/
+
+
+/*
+
+// 5.----------sorting(Write a program to sort an array of object by a target key. The original array should remain unchanged.)---
+ 
+var arr = [{
+        id: 1,
+        name: 'John',
+    }, {
+        id: 2,
+        name: 'Mary',
+    }, {
+        id: 3,
+        name: 'Andrew',
+}];
+
+function sortBy(array, key) {
+    let arr1=[],a;
+    // console.log(array[0][key]);
+    array.forEach((val)=>{
+        a=val[key]
+        arr1.push(a);
+    });
+    console.log(arr1);
+    console.log(arr1.sort());
+    return arr1.sort();
+    
+}
+
+var sorted = sortBy(arr, 'name');
+console.log("final result:",sorted)
+
+*/
+
+
+// 6.---------Normalization(Write a program to normalize a given input to get the expected output.)---
+
+// // From this
+var input = {
+  '1': {
+    id: 1,
+    name: 'John',
+    children: [
+      { id: 2, name: 'Sally' },
+      { id: 3, name: 'Mark', children: [{ id: 4, name: 'Harry' }] }
+    ]
+  },
+  '5': {
+    id: 5,
+    name: 'Mike',
+    children: [{ id: 6, name: 'Peter' }]
+  }
+};
+
+// // To this
+// var output = {
+//   '1': { id: 1, name: 'John', children: [2, 3] },
+//   '2': { id: 2, name: 'Sally' },
+//   '3': { id: 3, name: 'Mark', children: [4] },
+//   '4': { id: 4, name: 'Harry' },
+//   '5': { id: 5, name: 'Mike', children: [6] },
+//   '6': { id: 6, name: 'Peter' }
+// };
+
+// input=[1,2,4,5,9];
+//TODO
+function fun(input){
+    const result=input.reduce((accumulator,val,index)=>{
+        accumulator[index+1] += val;
+        return accumulator;
+    },{});
+    console.log(result);
+}
+
+var output=fun(input);
+
+
+
+
+
+
+
+
