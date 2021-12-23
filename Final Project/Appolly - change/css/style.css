@@ -185,8 +185,23 @@
     color:#6C6C72;
 }
 .carousel{
-    display: block;
-    text-align: center;
+    width: 100%;
+    position: relative;
+    
+}
+.carousel-left-next,.carousel-left-next{
+    width:5%;
+    float:left;
+}
+.carousel-left-iphone,.carousel-right-iphone{
+    width: 40%;
+    float: left;
+}
+.carousel-iphone{
+    width:50%;
+    position: absolute;
+    left: 25%;
+    top: 0px;
 }
 .dots-slider{
     width: 100%;
@@ -383,8 +398,8 @@
     padding-right: 25%;
     color: #FFFFFF;
 }
-.customer-content{
-    /* position: relative; */
+.customer-section{
+    position: relative;
 }
 .customer-content-left{
     float: left;
@@ -414,11 +429,13 @@
     box-shadow: 0px 10px 100px rgba(0, 0, 0, 0.24);
     border-radius: 10px;
     color: black;
-    margin: 0 auto;
-    margin-top: -10% ;
+    padding:5%;
+    position: absolute;
+    left: 25%;
+    top:-2%;
 }
 .customer .dots-slider{
-    margin-top: 1%;
+    margin-top: 3%;
 }
 /* ****************************************** */
 /* css for blog page */
@@ -729,6 +746,10 @@
     /* ****************************************** */
     /* media query for customer page */
 
+    .customer-content-overlap{
+        padding:3%;
+        top:-3%;
+    }
     /* ****************************************** */
     /* media queryfor blog page */
     .blog-content-items{
@@ -907,6 +928,11 @@
 
     /* ****************************************** */
     /* media query for customer page */
+
+    .customer-content-overlap{
+        padding:3%;
+        top:-5%;
+    }
 
     /* ****************************************** */
     /* media queryfor blog page */
