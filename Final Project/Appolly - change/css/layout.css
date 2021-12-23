@@ -74,25 +74,26 @@ header{
     width: 100%;
     height: 100%;
     padding-top:6% ;
-    padding-bottom:6%;
+    padding-bottom:7%;
     text-align: center;
     padding-right: 3%;
     padding-left: 3% ;
+    /* background-color: #232233; */
+    
 }
 .contactus{
+    position: relative;
     width: 100%;
-    height: 100%;
-    /* margin-bottom: -10%; */
-    z-index: 1;
+    margin-bottom: -27%;
     /* background-color: cadetblue; */
 }
 footer{
-    z-index: -1;
+ 
     background: url("../images/Rectangle 35.png");
     width: 100%;
     height: 100%;
     color: #FFFFFF;
-    padding-top:15% ;
+    padding-top:5% ;
     padding-bottom:3%;
     text-align: center;
     padding-right: 3%;
@@ -124,6 +125,10 @@ footer{
     .blog{
         padding-right: 0%;
         padding-left: 0% ;
+        /* padding-bottom:15%; */
+    }
+    .contactus{
+        margin-bottom: -6%;
     }
     footer{
         padding-right: 0%;
@@ -158,6 +163,9 @@ footer{
         font-weight: 600;
         font-size: 20px;
         color: #232233;
+    }
+    .contactus{
+        margin-bottom: -4%;
     }
 
 }

@@ -165,16 +165,17 @@ var arr = [{
 }];
 
 function sortBy(array, key) {
-    let arr1=[],a;
-    // console.log(array[0][key]);
-    array.forEach((val)=>{
-        a=val[key]
-        arr1.push(a);
-    });
-    console.log(arr1);
-    console.log(arr1.sort());
-    return arr1.sort();
-    
+    let temp;
+    for (let i=0; i<array.length; i++){
+        for (let j=i; j<array.length; j++){
+            if(array[i]['name']>array[j]['name']){
+                temp=array[i];
+                array[i]=array[j];
+                array[j]=temp;
+            }
+        }
+    }
+    return array;
 }
 
 var sorted = sortBy(arr, 'name');
@@ -183,24 +184,25 @@ console.log("final result:",sorted)
 */
 
 
+
 // 6.---------Normalization(Write a program to normalize a given input to get the expected output.)---
 
 // // From this
-var input = {
-  '1': {
-    id: 1,
-    name: 'John',
-    children: [
-      { id: 2, name: 'Sally' },
-      { id: 3, name: 'Mark', children: [{ id: 4, name: 'Harry' }] }
-    ]
-  },
-  '5': {
-    id: 5,
-    name: 'Mike',
-    children: [{ id: 6, name: 'Peter' }]
-  }
-};
+// var input = {
+//   '1': {
+//     id: 1,
+//     name: 'John',
+//     children: [
+//       { id: 2, name: 'Sally' },
+//       { id: 3, name: 'Mark', children: [{ id: 4, name: 'Harry' }] }
+//     ]
+//   },
+//   '5': {
+//     id: 5,
+//     name: 'Mike',
+//     children: [{ id: 6, name: 'Peter' }]
+//   }
+// };
 
 // // To this
 // var output = {
@@ -212,19 +214,61 @@ var input = {
 //   '6': { id: 6, name: 'Peter' }
 // };
 
-// input=[1,2,4,5,9];
-//TODO
-function fun(input){
-    const result=input.reduce((accumulator,val,index)=>{
-        accumulator[index+1] += val;
-        return accumulator;
-    },{});
-    console.log(result);
-}
-
-var output=fun(input);
-
-
+var input = {
+    '1': {
+      id: 1,
+      name: 'John',
+      children: [
+        { id: 2, name: 'Sally' },
+        { id: 3, name: 'Mark', children: [{ id: 4, name: 'Harry' }] }
+      ]
+    },
+    '5': {
+      id: 5,
+      name: 'Mike',
+      children: [{ id: 6, name: 'Peter' }]
+    }
+  };
+  
+  function normalization(){
+    var output={};
+    
+    function childArray(person){
+      let child_array = person.children.map((child_id)=>{
+        return child_id.id;
+      });
+      return child_array;
+    }
+    
+    function addChildren(person){
+      let child_arr = childArray(person);
+      person.children.forEach((child)=>{
+        output[child.id] = child;
+        if(child.children){
+          console.log(child);
+          addChildren(child);
+        }
+      });
+      changeChildrenFormat(person.id, child_arr);
+    }
+    
+    function changeChildrenFormat(person_id,child_arr){
+      output[person_id].children=child_arr;
+    }
+    
+    Object.keys(input).forEach((key)=>{
+      output[key]=input[key];
+      person=input[key];
+      if (person.children){
+        addChildren(person);
+      }
+    });
+    console.log("------");
+    return output;
+    
+  }
+  
+  console.log(normalization());
 
 
 

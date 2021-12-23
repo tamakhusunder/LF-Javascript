@@ -468,11 +468,10 @@
 /* css for contactus page */
 
 .contactus-content{
-    z-index: 1;
     width: 100%;
-    display: table;
-    margin: 0 auto;
-    padding: 2%;
+    /* display: table;
+    margin: 0 auto; */
+    /* padding: 2%; */
     background-color: #FFFFFF;
     border-radius: 30px;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
@@ -511,6 +510,7 @@
 }
 .footer-content{
     text-align: left;
+    margin-top: 5%;
 }
 
 .footer-content p{
