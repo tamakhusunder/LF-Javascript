@@ -8,8 +8,6 @@ class Point{
         this.left = x+'px';
         this.top = y+'px';
         
-        
-        
         this.element = document.createElement("div");
         this.element.style.width = "20px";
         this.element.style.height = "20px";
@@ -18,17 +16,14 @@ class Point{
         this.element.style.top = this.top;
         this.element.style.borderRadius = "50%";
         this.element.style.background = '#'+Math.floor(Math.random()*16777215).toString(16);
-
         boxElement.appendChild(this.element);
 
         this.element.addEventListener('click', this.changeColor.bind(this));
-
     }
 
     changeColor(){
         this.element.style.background = '#'+Math.floor(Math.random()*16777215).toString(16);
     }
-
 }
 
 
