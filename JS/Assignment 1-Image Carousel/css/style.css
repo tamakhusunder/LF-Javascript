@@ -1,0 +1,93 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+/* .main-container{
+    max-width: 1200px;
+    margin: 0 auto;
+    max-height: 100%;
+} */
+
+
+.carousel-container{
+    overflow: hidden;
+    background-color:rgb(114, 98, 98);
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+
+.carousel-image-wrapper{
+    position: relative;
+    background-color: royalblue;
+    left: 0px;
+
+}
+
+.carousel-image-wrapper img{
+    width: 600px;
+    height: 400px;
+    position:absolute;
+
+}
+
+
+
+
+
+
+.carouselBtnContainer{
+    position: relative;
+
+}
+.carouselBtnContainer-nextBtn{
+    position: absolute;
+    right: 0px;
+    top: 150px;
+    z-index: 1;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.carouselBtnContainer-prevBtn{
+    position: absolute;
+    left: 0px;
+    top: 150px;
+    z-index: 1;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    
+}
+.carouselBtnContainer-nextBtn:hover,.carouselBtnContainer-prevBtn:hover{
+    text-shadow: 1px 1px 1px #000000;
+    box-shadow: inset 0 0 10px #000000;
+
+}
+
+.carouselDotCotainer{
+    position: absolute;
+    top:350px;
+    left: 46%;
+}
+
+.carouselDotCotainer-dots0,.carouselDotCotainer-dots1,.carouselDotCotainer-dots2{
+    float:left;
+    font-size: 30px;
+    background-color: whitesmoke;
+    border: 1px solid black;
+    border-radius: 30%;
+    color: white;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.carouselDotCotainer-dots0:hover,.carouselDotCotainer-dots1:hover,.carouselDotCotainer-dots2:hover{
+    box-shadow: inset 0 0 10px #000000;
+
+}
