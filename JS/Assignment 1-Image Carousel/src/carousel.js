@@ -120,9 +120,10 @@
  /**
   * event handler for nextButtton
   */
+ let lastIndex = imageCount-1;
  nextBtn.onclick = function () {
      currentWrapperPosition = parseInt(wrapperImage.style.left);
-     if(currentIndex == 2){
+     if(currentIndex == lastIndex){
          currentIndex = 0;
          sign=-1;
          
@@ -143,7 +144,7 @@
  prevBtn.onclick = function () {
      currentWrapperPosition = parseInt(wrapperImage.style.left);
      if(currentIndex == 0){
-         currentIndex = 2;
+         currentIndex = lastIndex;
          sign = -1;
      }
      else{      
