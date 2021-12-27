@@ -1,0 +1,17 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+#viewport {
+    width: 1000px;
+    height: 600px;
+    border: 1px solid black;
+    background-color: black;
+  }
+  
+.ball {
+    border-radius: 50%;
+  }
+  
