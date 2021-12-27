@@ -89,11 +89,11 @@
                          }
                          dx=dx-speed*sign;
                      },5); 
-     // while(dx!= finalPosition){
-     //     wrapperImage.style.left = dx +"px";
-     //     dx=dx-speed*sign;
-     // }
-     // wrapperImage.style.left = dx +"px";
+    //  while(dx!= finalPosition){
+    //         wrapperImage.style.left = dx +"px";
+    //         dx=dx-speed*sign;
+    //  }
+    //  wrapperImage.style.left = dx +"px";
  
  }
  
