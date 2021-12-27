@@ -133,7 +133,6 @@
          sign = 1;
      }
      newWrapperPosition = -(currentIndex*imageWidth)
-     console.log(sign);
      nextAnimation(currentWrapperPosition,newWrapperPosition,sign);
  
  }
