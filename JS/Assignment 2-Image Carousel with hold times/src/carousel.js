@@ -67,6 +67,7 @@ class Carousel{
         let newWrapperPosition;
         let dx=0;
         let sign = 1;
+        let lastIndex = imageCount-1;
 
          /**
          * function for next-animation
@@ -82,7 +83,7 @@ class Carousel{
                                     clearInterval(interval);
                                 }
                                 dx=dx-speed*sign;
-                            },5); 
+                            },self.transitionTime); 
 
         }
          /**
@@ -99,7 +100,7 @@ class Carousel{
                                     clearInterval(interval);
                                 }
                                 dx=dx+speed*sign;
-                            },5); 
+                            },self.transitionTime); 
 
         }
 
@@ -107,7 +108,21 @@ class Carousel{
         /**
          * event handler for nextButtton
          */
-        let lastIndex = imageCount-1;
+        let animateAuto = setInterval(()=>{
+            currentWrapperPosition = parseInt(wrapperImage.style.left);
+            if(currentIndex == lastIndex){
+                currentIndex = 0;
+                sign=-1;
+                
+            }
+            else{
+                currentIndex++;
+                sign = 1;
+            }
+            newWrapperPosition = -(currentIndex*self.imageWidth)
+            nextAnimation(currentWrapperPosition,newWrapperPosition,sign);
+        
+        },self.holdTime);
         nextBtn.onclick = function () {
             currentWrapperPosition = parseInt(wrapperImage.style.left);
             if(currentIndex == lastIndex){
@@ -203,7 +218,7 @@ class Carousel{
 const carousel1 = new Carousel({
                         carouselId : 'carousel-container-1',
                         instance : 1,
-                        transitionTime : 5000,
+                        transitionTime : 5,
                         holdTime : 3000,
                         imageWidth : 600 
                     })
@@ -212,8 +227,8 @@ carousel1.runCarousel();
 const carousel2 = new Carousel({
                         carouselId : 'carousel-container-2',
                         instance : 1,
-                        transitionTime : 5000,
-                        holdTime : 3000,
+                        transitionTime : 20,
+                        holdTime : 4000,
                         imageWidth : 600 
                     })
 carousel2.runCarousel();
