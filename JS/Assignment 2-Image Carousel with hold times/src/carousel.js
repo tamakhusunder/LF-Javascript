@@ -3,7 +3,6 @@ class Carousel{
 
     constructor(obj){
         this.carouselId = obj.carouselId;
-        this.instance = obj.instance;
         this.holdTime = obj.holdTime;
         this.transitionTime = obj.transitionTime;
         this.imageWidth = obj.imageWidth;
@@ -11,7 +10,6 @@ class Carousel{
 
     runCarousel(){
         var self=this;
-        
         var container = document.querySelector(`.${this.carouselId}`);
         var wrapperImage = container.children[0]
         wrapperImage.style.left = "0px";
@@ -104,9 +102,8 @@ class Carousel{
 
         }
 
-        
         /**
-         * event handler for nextButtton
+         * automatic using function for animation
          */
         let animateAuto = setInterval(()=>{
             currentWrapperPosition = parseInt(wrapperImage.style.left);
@@ -123,6 +120,10 @@ class Carousel{
             nextAnimation(currentWrapperPosition,newWrapperPosition,sign);
         
         },self.holdTime);
+
+        /**
+         * event handler for nextButtton
+         */
         nextBtn.onclick = function () {
             currentWrapperPosition = parseInt(wrapperImage.style.left);
             if(currentIndex == lastIndex){
@@ -215,9 +216,11 @@ class Carousel{
 }
 
 
+/**
+ * creating class 
+ */
 const carousel1 = new Carousel({
                         carouselId : 'carousel-container-1',
-                        instance : 1,
                         transitionTime : 5,
                         holdTime : 3000,
                         imageWidth : 600 
@@ -226,12 +229,12 @@ carousel1.runCarousel();
 
 const carousel2 = new Carousel({
                         carouselId : 'carousel-container-2',
-                        instance : 1,
                         transitionTime : 20,
                         holdTime : 4000,
                         imageWidth : 600 
                     })
 carousel2.runCarousel();
+
 
 
 
