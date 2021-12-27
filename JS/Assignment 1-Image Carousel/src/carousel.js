@@ -69,6 +69,7 @@
  let newWrapperPosition;
  let dx=0;
  let sign = 1;
+ let lastIndex = imageCount-1;
  
  
  
@@ -105,14 +106,14 @@
   * @param {number} sign - signvalue
   */
  function prevAnimation(currentPosition, finalPosition,sign){ 
-     dx=currentPosition;
-     let interval = setInterval(() => { 
-                         wrapperImage.style.left = dx +"px";
-                         if (dx==finalPosition){
-                             clearInterval(interval);
-                         }
-                         dx=dx+speed*sign;
-                     },5); 
+    dx=currentPosition;
+    let interval =setInterval(() => { 
+                     wrapperImage.style.left = dx +"px";
+                     if (dx==finalPosition){
+                         clearInterval(interval);
+                     }
+                     dx=dx+speed*sign;
+                 },5);  
  
  }
  
@@ -120,7 +121,6 @@
  /**
   * event handler for nextButtton
   */
- let lastIndex = imageCount-1;
  nextBtn.onclick = function () {
      currentWrapperPosition = parseInt(wrapperImage.style.left);
      if(currentIndex == lastIndex){
