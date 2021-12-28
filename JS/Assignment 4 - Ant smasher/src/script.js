@@ -17,7 +17,7 @@ class Ant{
         this.dy = getDirection();
         this.antElement = document.createElement("img");
         this.antElement.classList.add("ant");
-        this.antElement.src = "img/ant.png";
+        this.antElement.src = "img/movingant.gif";
         this.antElement.alt = "ant_image";
         this.antElement.style.width = 2*this.radius + "px";
         this.antElement.style.height = 2*this.radius + "px";
