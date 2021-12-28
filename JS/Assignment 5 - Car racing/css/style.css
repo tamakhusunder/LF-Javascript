@@ -1,0 +1,71 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+}
+
+
+/* start menu div */
+.start-menu{
+
+}
+
+
+
+
+
+/* road game - section */
+.road{
+    margin: 0 auto;
+    /* visibility: hidden; */
+    /* display: none; */
+    width:600px;
+    display: flex;
+    /* overflow: hidden; */
+    position: relative;
+    /* border:1px solid red; */
+    background-image: url("../img/road.png");
+    background-size: cover;
+}
+.lane{
+    flex:1;
+    height: 600px;
+    border: 1px solid black;
+}
+
+.middle,.left{
+    border-right: none;
+}
+.car{
+    width: 100px;
+    height: 130px;
+    position: absolute;
+    background-color: blanchedalmond;
+    bottom : 0px;
+    /* left: 450px; */
+    /* background-image: url("../img/player.png"); */
+    /* background-size: contain; */
+    background-repeat: no-repeat;
+    /* max-width: 1; */
+    object-fit: contain;
+  
+}
+
+.car.lane-left{
+    left: 50px;
+}
+
+.car.lane-middle{
+    left: 250px;
+}
+.car.lane-right{
+    left: 450px;
+}
+
+
+
+
+.exit-menu{
+
+}
