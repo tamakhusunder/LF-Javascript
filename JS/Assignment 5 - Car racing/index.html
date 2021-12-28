@@ -8,20 +8,30 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="scoreboard">Score : <span class="scoredigit">0</span></div>
-    <div class="start-menu">
-        <h3>Press Enter To start</h3>
-        
+    <span class="scoreboard">Score : <i id="scoredigit">0</i></span>
 
+    <div class="start-menu">
+        <h2>Press Enter To start</h3>
+        <h3>Instructions</h3>
+            <p>Use left and right arrow keys to change the lanes</p>
+            <p>Avoid Obstacles</p>
+            <!-- <p>Press spacebar to shoot ammo</p>
+            <p>You can only use one ammo every 5 seconds</p> -->
     </div>
-    <div class="road">
-        <div class="lane left"></div>
-        <div class="lane middle"></div>
-        <div class="lane right"></div>
-        <div id="car" class="car lane-middle"></div>
+
+    <span class="high-score">High Score :  <i id="highscoredigit">0</i></span>
+
+    <div class="game-section">
+        <div class="road">
+            <div class="lane left"></div>
+            <div class="lane middle"></div>
+            <div class="lane right"></div>
+            <div id="car" class="car lane-middle"></div>
+        </div>
     </div>
+
     <div class="exit-menu">
-        
+        <div>Game over<br>Please Enter <br>Spacebar to restart</div>
     </div>
     <script src="src/utils.js"></script>
     <script src="src/script.js"></script>
