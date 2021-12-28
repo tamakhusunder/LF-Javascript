@@ -4,7 +4,7 @@ const boundaryHeight = 600;
 
 
 class Ant{
-    constructor(x, y, radius, color){
+    constructor(x, y, radius){
         var self = this;
         this.x = x;
         this.y = y;
@@ -17,7 +17,8 @@ class Ant{
         this.dy = getDirection();
         this.antElement = document.createElement("img");
         this.antElement.classList.add("ant");
-        this.antElement.src = "img/ant.png"
+        this.antElement.src = "img/ant.png";
+        this.antElement.alt = "ant_image";
         this.antElement.style.width = 2*this.radius + "px";
         this.antElement.style.height = 2*this.radius + "px";
 
@@ -26,6 +27,20 @@ class Ant{
         this.antElement.style.position = "absolute";
 
         viewport.appendChild(this.antElement);
+
+        // event handler to kill ant
+        this.antElement.addEventListener('click',function(e){
+                // viewport.removeChild(this.antElement);
+                this.antElement.remove();
+                score +=1;
+                console.log("score: ",score);
+                // let removeAntArray = antArray.filter((valueAnt)=>{
+                //     return valueAnt != this;
+                // })
+                // console.log(removeAntArray);
+                // antArray = removeAntArray;
+        }.bind(this));
+
         this.moveAnt();
     }
 
@@ -93,10 +108,11 @@ class Ant{
 
 
 //start up
-const antCount = 50;
-const antArray = [];
+let antCount = 50;
+let antArray = [];
 const fps = 60;
 const speed = 1;
+let score = 0;
 
 //creating ant array to create list of class object
 for(let i = 0; i< antCount; i++){
