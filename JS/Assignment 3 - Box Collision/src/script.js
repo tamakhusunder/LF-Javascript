@@ -106,7 +106,7 @@ for(let i = 0; i< ballCount; i++){
     let y = getRandomInt(radius,boundaryHeight-2*radius);
     let color = generateRandomColor();
 
-    // detect collision while generating new ball
+    // detect collision while generating new ball an creating new center
     if(i !== 0){
         for (let j = 0; j < i; j++){
             let d = getDistance(x, y, ballArray[j].x, ballArray[j].y);
