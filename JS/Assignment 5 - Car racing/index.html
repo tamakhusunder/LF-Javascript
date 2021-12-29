@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,19 +8,21 @@
     <title>Car racing</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <span class="scoreboard">Score : <i id="scoredigit">0</i></span>
 
     <div class="start-menu">
-        <h2>Press Enter To start</h3>
-        <h3>Instructions</h3>
+        <h2>Car racing game</h2>
+        <button id="start-btn">Start the game</button>
+            <h3>Instructions</h3>
             <p>Use left and right arrow keys to change the lanes</p>
             <p>Avoid Obstacles</p>
             <!-- <p>Press spacebar to shoot ammo</p>
             <p>You can only use one ammo every 5 seconds</p> -->
     </div>
 
-    <span class="high-score">High Score :  <i id="highscoredigit">0</i></span>
+    <span class="high-score">High Score : <i id="highscoredigit">0</i></span>
 
     <div class="game-section">
         <div class="road">
@@ -31,9 +34,13 @@
     </div>
 
     <div class="exit-menu">
-        <div>Game over<br>Please Enter <br>Spacebar to restart</div>
+        <div>
+            <b>Game over</b><br>Press <i>Enter</i> to restart
+        </div>
     </div>
+
     <script src="src/utils.js"></script>
     <script src="src/script.js"></script>
 </body>
-</html> 
+
+</html>

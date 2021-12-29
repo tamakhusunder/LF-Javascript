@@ -48,6 +48,17 @@ body{
     border-radius: 50px;
     background-color: rgb(238, 221, 199);
 }
+.start-menu button{
+    font-size: 40px;
+    border-radius: 40px;
+    padding: 1%;
+    text-shadow: 1px 1px 1px #000000;
+    cursor: pointer;
+    border : 5px solid green
+}
+.start-menu button:hover{
+    box-shadow: inset 0 0 10px #000000;
+}
 
 .start-menu h2,.start-menu h3,.start-menu p{
     padding-top: 10px;
@@ -115,7 +126,7 @@ body{
     font-size: 50px;
     position: absolute;
     z-index: 2;
-    top: 45%;
+    top: 35%;
     left: 35%;
 }
 .exit-menu div{
