@@ -53,8 +53,8 @@ class Bird{
         this.x = 10;
         this.y = 10;
         this.vy = 0;    //control bird position
-        this.width = 20;
-        this.height = 20;
+        this.width = 40;
+        this.height = 40;
         this.gravity = 1/5;
         this.jump = 1;
     }
