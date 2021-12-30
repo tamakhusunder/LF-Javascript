@@ -1,30 +1,62 @@
+/**
+ * Accessing DOM
+ */
+const startMenuDiv = document.querySelector(".start-menu");
+const gamesectionDiv = document.querySelector(".game-section");
+const scoreElement = document.getElementById("scoredigit");
+const startbtnElement = document.getElementById("start-btn");
+const highScoreElement = document.getElementById("highscoredigit");
+const gameOverElement = document.querySelector(".exit-menu");
+
 const  viewport = document.querySelector('.sky_bg');
 const  footer = document.querySelector('.footer');
 
-console.log(viewport)
+
 viewportWidth = 600;
 viewportHeight = 400;
 
+const skyHeight =300;
 const floorWidth = 600;
 const floorHeight = 100;
 
+
+/**
+ * Game Constants and variable
+ */
 let score = 0;
-let highScore = 0;
-let gameSpeed = 2;
-let frame = 0;
 let spacePress = false;
 
 
-//bird-----------------
+/**
+ * Event Handler to start the game
+ */
+ let initalPage = startbtnElement.addEventListener("click", (event) => {
+    startMenuDiv.style.display = "none";
+    gamesectionDiv.style.display = "block";
+    createArray();
+    animation();
+});
+
+/**
+ * Set a high score in local storage
+ */
+ if(window.localStorage.flaphighscore != undefined){
+    highScoreElement.innerHTML = window.localStorage.getItem('flaphighscore');
+}
+
+
+
+
+//  ---------------------------------------------
 class Bird{
     constructor(){
-        this.x = 150;
-        this.y = 200;
-        this.vy = 0;    //center bird position
+        this.x = 10;
+        this.y = 10;
+        this.vy = 0;    //control bird position
         this.width = 20;
         this.height = 20;
-        this.gravity = 1;
-        this.jump = 2;
+        this.gravity = 1/5;
+        this.jump = 1;
     }
 
     draw() {
@@ -37,10 +69,6 @@ class Bird{
         this.birdElement.style.top = this.y + "px";
 
         viewport.appendChild(this.birdElement);
-        this.birdElement.innerHTML="sss"
-
-        // this.birdElement.src = "img/movingant.gif";
-        // this.birdElement.alt = "ant_image";
       
     }
 
@@ -73,6 +101,7 @@ class Bird{
 const bird = new Bird();
 bird.draw();
 
+//bird control event
 document.addEventListener('keydown',(event) =>{
     if(event.code == "Space"){
         spacePress = true;
@@ -87,7 +116,7 @@ document.addEventListener('keyup',(event) =>{
 });
 
 
-////////////////////////////////////////
+//  ---------------------------------------------
 class Obstacle{
     constructor(){
         this.topX =getRandomInt(300,1200);
@@ -109,7 +138,6 @@ class Obstacle{
         this.pipeElement.style.top = this.topY + "px";
 
         viewport.appendChild(this.pipeElement);
-        this.pipeElement.innerHTML="sss";
 
         this.bottomX = this.topX
         this.bottomY = getRandomInt(200,250);
@@ -117,27 +145,82 @@ class Obstacle{
         this.pipeElement2 = document.createElement("div");
         this.pipeElement2.classList.add("pipe2");
         this.pipeElement2.style.width = this.width+ "px";
-        this.pipeElement2.style.height = 200 + "px";
+        this.pipeElement2.style.height = viewportHeight + "px";
         this.pipeElement2.style.position = "absolute";
         this.pipeElement2.style.left = this.bottomX + "px";
         this.pipeElement2.style.top = this.bottomY + "px";
 
         viewport.appendChild(this.pipeElement2);
-        this.pipeElement2.innerHTML="sss";
 
     }
     update() {
+        //if-condition for score
+        // if (this.topX < (bird.x)) {
+        //     score++;
+        //     scoreElement.innerHTML = score;
+        // }
+        //if-condition for update the bird
         if (this.topX < (0-this.width)){
             this.topX = getRandomInt(300,1200);
             this.bottomX = this.topX;
             this.pipeElement.style.left = this.topX + "px";
             this.pipeElement2.style.left = this.bottomX + "px";
+            score++;
+            scoreElement.innerHTML = score;
         }
         else{
             this.topX -= this.speed;
             this.pipeElement.style.left = this.topX + "px";
             this.pipeElement2.style.left = this.topX + "px";
         }
+    }
+    checkCollision() {
+        let birdDim = {
+            x : bird.x,
+            y : bird.y,
+            w : bird.width,
+            h : bird.height
+        }
+        let topPipeDim ={
+            x : this.topX,
+            y : this.topY,
+            w : this.width,
+            h : this.height
+        }
+        let bottomPipeDim ={
+            x : this.bottomX,
+            y : this.bottomY,
+            w : this.width,
+            h : viewportHeight
+        }
+        console.log(birdDim)
+        if ((birdDim.x < topPipeDim.x + topPipeDim.w &&
+            birdDim.x + birdDim.w > topPipeDim.x &&
+            birdDim.y < topPipeDim.y + topPipeDim.h &&
+            birdDim.h + birdDim.y > topPipeDim.y) ||
+            (birdDim.x < bottomPipeDim.x + bottomPipeDim.w &&
+            birdDim.x + birdDim.w > bottomPipeDim.x &&
+            birdDim.y < bottomPipeDim.y + bottomPipeDim.h &&
+            birdDim.h + birdDim.y > bottomPipeDim.y)){
+                console.log("collision detected!");
+                if(window.localStorage.flaphighscore == undefined || window.localStorage.flaphighscore < score){
+                    window.localStorage.setItem("flaphighscore",score);
+                }
+                highScoreElement.innerHTML = window.localStorage.getItem('flaphighscore');
+                return true;
+            }
+        if(birdDim.y <=0 || birdDim.y >= skyHeight-bird.height){
+            console.log("collision detected!");
+                if(window.localStorage.flaphighscore == undefined || window.localStorage.flaphighscore < score){
+                    window.localStorage.setItem("flaphighscore",score);
+                }
+                highScoreElement.innerHTML = window.localStorage.getItem('flaphighscore');
+                return true;
+        } 
+        else {
+            return false;
+        }
+
     }
     
 }
@@ -150,18 +233,31 @@ function createArray(){
         obsArray.push(obs);
     }
 }
-createArray();
 
 
-////////////////////////////
+//  ---------------------------------------------
 function animation(){
-    
+    let collisionFlag = false;
     bird.update();
     obsArray.forEach((obs) => {
         obs.update();
+        let flag = obs.checkCollision();
+        if (flag == true){
+            collisionFlag =true;
+        }
     });
+    if (collisionFlag == true){
+        gameOverElement.style.display ="block";
+        return;
+    }
     
     requestAnimationFrame(animation);
 }
-animation();
+
+
+document.addEventListener("keydown", (event) => {
+    if (event.code === "Enter") {
+        window.location.reload();
+    }
+});
 

@@ -10,13 +10,34 @@
 </head>
 
 <body>
+    <span class="scoreboard">Score : <i id="scoredigit">0</i></span>
 
-    <div class="sky_bg">
-        <div class="footer"></div>
+    <div class="start-menu">
+        <h2>Flappy Bird</h2>
+        <button id="start-btn">Start the game</button>
+            <h3>Instructions</h3>
+            <p>Use spacaebar to flap the bird</p>
+            <p>Avoid upper pipe</p>
     </div>
-    <script src="src/utils.js"></script>
-    <!-- <script src="src/bird.js"></script> -->
-    <!-- <script src="src/obstacle.js"></script> -->
+
+    <span class="high-score">High Score : <i id="highscoredigit">0</i></span>
+
+
+    <div class="game-section">
+        <div class="sky_bg">
+            <div class="header-bg"></div>
+            <div class="footer"></div>
+        </div>
+    </div>
+
+
+    <div class="exit-menu">
+        <div>
+            <b>Game over</b><br>Press <i>Enter</i> to restart
+        </div>
+    </div>
+
+    <script src="src/utils.js"></script> 
     <script src="src/script.js"></script>
 </body>
 
