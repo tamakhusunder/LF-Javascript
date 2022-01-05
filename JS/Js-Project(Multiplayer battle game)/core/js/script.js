@@ -9,6 +9,12 @@ const  gamePage = document.querySelector('.game');
 const  soccer = document.querySelector('.game-soccer-top');
 const  soccerBoundary = document.querySelector('.soccer-border');
 
+const soccerInstruction = document.querySelector('.game-soccer-instruction');
+const soccerBoard = document.querySelector('.game-soccer-winnerBoard');
+const soccerBluePointDiv = document.querySelector('.soccer-point-blue');
+const soccerRedPointDiv = document.querySelector('.soccer-point-red');
+
+
 const soccerBoundaryWidth = 850;
 const soccerBoundaryHeight = 400;
 const soccerCenterX = soccerBoundaryWidth/2;    //300
@@ -24,11 +30,12 @@ const soccerCenterY = soccerBoundaryHeight/2;   //200
 // ball.style.border = '1px solid blue';
 
 // soccerBoundary.appendChild(ball);
-
-// console.log(soccerBorder.style.width);
-let angleList =[0,22.5,45,67.5,90,112.5,135,157.5,180,202.5,225,247.5,270,292.5,315,337.5,360];
-// let angleList =[0,45,90,135,180,225,270,,315,360];
-
+const state = {
+    current : 0,
+    getReady : 0,
+    gameIn : 1,
+    gameOver : 2
+}
 const extraAngle=20;
 let playerWidth = 80;
 let playerHeight = 80;
@@ -39,73 +46,164 @@ let initialBlueY = (soccerBoundaryHeight)/2 - playerHeight/2;
 let initialRedX = ((soccerBoundaryWidth)/2) + playerWidth*4;
 let initialRedY = initialBlueY;
 
-// var snd = new Audio("whistle.mp3"); // buffers automatically when created
-// snd.play();
+let soccerBluePoint = 0;
+let soccerRedPoint = 0;
+
+
+
+class GoalPost{
+    constructor(width,height,x,y){
+        this.width = width;
+        this.height = height;
+        this.x = x;
+        this.y = y;
+    }
+
+    draw(){
+        this.goalPostElement = document.createElement('div');
+        this.goalPostElement.classList.add("soccerGoalPost");
+        this.goalPostElement.style.width = this.width + 'px';
+        this.goalPostElement.style.height = this.height + 'px';
+        this.goalPostElement.style.position = 'absolute';
+        this.goalPostElement.style.left = this.x + 'px';
+        this.goalPostElement.style.top = this.y + 'px';
+        this.goalPostElement.style.border = '1px solid blue';
+        soccerBoundary.appendChild(this.goalPostElement);
+    }
+}
+
+
+let goalPost1 = new GoalPost(10,200,0,soccerCenterY/2);
+let goalPost2 = new GoalPost(10,200,soccerBoundaryWidth-10,soccerCenterY/2);
+goalPost1.draw();
+goalPost2.draw();
+
 
 class Ball{
     constructor(){
         this.width = 60;
         this.height = 60;
-        this.x = soccerCenterX-(this.width/2);
-        this.y = soccerCenterY-(this.height/2);
+        this.x = soccerCenterX-(this.width/2);  //395
+        this.y = soccerCenterY-(this.height/2); //170
         this.radius = this.width/2;
-        this.direction = 1;
-        this.velocity = 0;
+        this.dx = 1;
+        this.dy = 1;
         this.angleIt = 0;
+        this.roll = 10;
 
+        this.initialX = soccerCenterX-(this.width/2);;
+        this.initialY = soccerCenterY-(this.height/2);
     }
+
     draw() {
-        this.ballElement = document.createElement('div');
-        this.ballElement.classList.add("soccerBall");
-        this.ballElement.style.width = this.width + 'px';
-        this.ballElement.style.height = this.height + 'px';
-        this.ballElement.style.position = 'absolute';
-        this.ballElement.style.left = this.x + 'px';
-        this.ballElement.style.top = this.y + 'px';
-        this.ballElement.style.borderRadius = 50 + '%';
-        this.ballElement.style.border = '1px solid blue';
-        soccerBoundary.appendChild(this.ballElement);
-        console.log(this.ballElement)
+   
+            this.ballElement = document.createElement('div');
+            this.ballElement.classList.add("soccerBall");
+            this.ballElement.style.width = this.width + 'px';
+            this.ballElement.style.height = this.height + 'px';
+            this.ballElement.style.position = 'absolute';
+            this.ballElement.style.left = this.x + 'px';
+            this.ballElement.style.top = this.y + 'px';
+            this.ballElement.style.borderRadius = 50 + '%';
+            soccerBoundary.appendChild(this.ballElement);
+            console.log(this.ballElement)
+        
     }
+
     update(){
         // if (this.x > soccerBoundaryWidth-this.width){
         //     this.x = soccerBoundaryWidth-this.width;
-        //     this.velocity = 0;
+        //     this.velocity.x = 0;
+        //     this.velocity.y = 0;
         //     this.ballElement.style.left = this.x + "px";
         // }
         // if (this.y > soccerBoundaryHeight-this.height){
         //     this.y = soccerBoundaryHeight-this.height;
-        //     this.velocity = 0;
+        //     this.velocity.x = 0;
+        //     this.velocity.y = 0;
         //     this.ballElement.style.top = this.y + "px";
-        // } 
-        this.rotateBall();
-        this.checkBallPlayerCollision();
+        // }
+        if (state.current == state.gameIn){ 
+            this.rotateBall();
+            this.checkBallPlayerCollision();
+            this.checkGoalPostCollision();
+        }
     }
 
     rotateBall(){
-        if((this.angleIt+1)%(360+2) == 0){
-            this.angleIt=0;
-        }
-        this.angle = this.angleIt;
-        this.angleIt++;
-        this.ballElement.style.transform=`rotate(${this.angle}deg)`;
+            if((this.angleIt+1)%(360+2) == 0){
+                this.angleIt=0;
+            }
+            this.angle = this.angleIt;
+            this.angleIt++;
+            this.ballElement.style.transform=`rotate(${this.angle}deg)`;
+        
     }
 
     checkBallPlayerCollision(){
-        if (pointsRectCollision(this,playerBlue)){
-            let xDirection = playerBlue.x < ball.x ? 1 : -1;
-            let yDirection = playerBlue.y < ball.y ? 1 : -1;
-            console.log('sunder');
-            this.x = this.x+10;
-            this.ballElement.style.left = this.x + 'px';
+            let dist1 = getDistance(this.x,this.y,playerBlue.x,playerBlue.y)
+            if ( dist1 <= this.radius+playerBlue.radius){
+                console.log("colide");
+                this.dx = ball.x > playerBlue.x ? 1 : -1;
+                this.x = this.x + this.roll * this.dx;
+                this.ballElement.style.left = this.x + 'px'; 
+            
+            }
+            let dist2 = getDistance(this.x,this.y,playerRed.x,playerRed.y)
+            if ( dist2 <= this.radius+playerRed.radius){
+                console.log("colide2");
+                this.dx = ball.x > playerRed.x ? 1 : -1; 
+                this.x = this.x + this.roll * this.dx;
+                this.ballElement.style.left = this.x + 'px'; 
+            }
+
+            // if (pointsRectCollision(this,playerRed)){
+            //     console.log('suTamaknder');
+            //     this.x = this.x-10;
+            //     this.ballElement.style.left = this.x + 'px';
+            // }
+        
+    }
+
+    checkWallCollision(){
+        if (this.x >  soccerBoundaryWidth-this.width) {
+            this.dx = -1;
         }
-        if (pointsRectCollision(this,playerRed)){
-            console.log('suTamaknder');
-            this.x = this.x-10;
-            this.ballElement.style.left = this.x + 'px';
+
+        if (this.y >soccerBoundaryHeight-this.height) {
+            this.dy = -1;
+        }
+
+        if (this.x < 0){
+            this.dx = 1;
+        }
+        if(this.y < 0){
+            this.dy = 1;
         }
     }
 
+    checkGoalPostCollision(){
+        if (pointsRectCollision(this,goalPost1)) {
+            console.log("post1 collision");
+            soccerRedPoint++;
+            soccerRedPointDiv.innerHTML = soccerRedPoint;
+            state.current = state.gameOver;
+           
+        }
+        else if (pointsRectCollision(this,goalPost2)) {
+            console.log("post2 collision");
+            soccerBluePoint++;
+            soccerBluePointDiv.innerHTML = soccerBluePoint;
+            state.current = state.gameOver;
+        }
+    }
+
+    reset(){
+        this.x = this.initialX;
+        this.y = this.initialY;
+        this.ballElement.style.left = this.x + "px";
+        this.ballElement.style.top = this.y + "px";
+    }
 }
 
 let ball = new Ball();
@@ -128,6 +226,9 @@ class Player{
         this.keyPressed = false;
         this.angleIt = 0;
 
+        this.initialX = x;
+        this.initialY = y;
+
         //player control event
         document.addEventListener('keydown',(event) =>{
             if(event.code == this.key){
@@ -143,6 +244,7 @@ class Player{
         });
 
     }
+
     draw() {
         this.playerElement = document.createElement('div');
         this.playerElement.classList.add(this.name);
@@ -152,11 +254,11 @@ class Player{
         this.playerElement.style.left = this.x + 'px';
         this.playerElement.style.top = this.y + 'px';
         this.playerElement.style.borderRadius =  50 + '%';
-        this.playerElement.style.border = '1px solid blue';
         soccerBoundary.appendChild(this.playerElement);
         
     }
     update(){
+        if( state.current == state.gameIn)
         this.limitPlayerToBoundary()    
     }
 
@@ -249,6 +351,12 @@ class Player{
             }
         }
     }
+    reset(){
+        this.x = this.initialX;
+        this.y = this.initialY;
+        this.playerElement.style.left = this.x + "px";
+        this.playerElement.style.top = this.y + "px";
+    }
     // checkBallCollision(){
     //     // this.dist = getDistance(this.x, this.y, ball.x, ball.y);
     //     // if (this.dist <= (this.radius + ball.radius)){
@@ -270,13 +378,55 @@ let playerBlue = new Player(playerWidth,playerHeight,initialBlueX,initialBlueY,'
 let playerRed = new Player(playerWidth,playerHeight,initialRedX,initialRedY,'soccerRedPlayer','KeyL',-1,velocity,walk);
 playerBlue.draw();
 playerRed.draw();
+
+
+// click event for switching screen of soccer game
+soccer.addEventListener("click", function (event) {
+    console.log("i am click");
+    switch(state.current){
+        case state.getReady:
+            state.current = state.gameIn;
+            break;
+        case state.gameIn:
+            break;
+        case state.gameOver:
+            state.current = state.gameIn;
+            ball.reset();
+            playerBlue.reset();
+            playerRed.reset();
+            break;
+       default: 
+    }
+})
+
+function showInstruction() {
+    if (state.current === state.getReady){
+        soccerInstruction.style.display = "block";
+    }
+    else soccerInstruction.style.display = "none";
+}
+
+function showBoard() {
+    if (state.current === state.gameOver){
+        soccerBoard.style.display = "block";
+    }
+    else soccerBoard.style.display = "none";
+}
+
 function animation () {
-    ball.update();
+    console.log(state.current)
+    showInstruction();
+    showBoard();
     playerBlue.update();
     playerRed.update();
-    ball.checkBallPlayerCollision();
-    // playerBlue.checkBallCollision();
-    // playerRed.checkBallCollision();
+
+    // ball.rotateBall();
+    ball.update();
+    // ball.checkBallPlayerCollision();
+    // ball.checkGoalPostCollision()
     requestAnimationFrame(animation);
 }
+
+
 animation();
+
