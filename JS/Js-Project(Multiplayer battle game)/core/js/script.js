@@ -31,7 +31,6 @@ homeChickenBtn.addEventListener('click', function (event) {
 
 
 //function only
-
 //fn_chicken-run
 function  fn_chicken() {
     homePage.style.display = "none";
@@ -42,7 +41,19 @@ function  fn_chicken() {
     const chickenGameBoundaryDiv= document.querySelector(".game-chicken-border");
     const chickenSkyyDiv= document.querySelector(".chicken-border-sky");
 
+    const chickenInstruction = document.querySelector('.game-chicken-instruction');
+    const chickenBoard = document.querySelector('.game-chicken-winnerBoard');
+    const chickenBluePointDiv = document.querySelector('.chicken-point-blue');
+    const chickenRedPointDiv = document.querySelector('.chicken-point-red');
 
+
+  
+    const state = {
+        current : 0,
+        getReady : 0,
+        gameIn : 1,
+        gameOver : 2
+    }
     const chickenGameBoundaryWidth = 800;
     const chickenGameBoundaryHeight = 250;
     const chickenGameSkyHeight = 220;
@@ -54,6 +65,7 @@ function  fn_chicken() {
     const chickenBlueY = chickenGameSkyHeight - chickenHeight; //170
     const jumpHeightBLueY = chickenBlueY - 130;
     const keyBlue = "KeyA";
+    let chickenBluePoint = 0;
     const imgBlue = "core/assets/images/chickenrun/chicken-blue.png";
 
     const imgBlueArray = [
@@ -65,11 +77,15 @@ function  fn_chicken() {
     const chickenRedY = 410;
     const jumpHeightRedY = chickenRedY - 130;
     const keyRed = "KeyL"; 
+    let chickenRedPoint = 0;
     const imgRed = "core/assets/images/chickenrun/chicken-red.png";
     const imgRedArray = [
         "core/assets/images/chickenrun/chicken-red.png",
         "core/assets/images/chickenrun/chicken-red-jump.png"
     ];
+
+    
+
 
 
     class Chicken{
@@ -88,8 +104,16 @@ function  fn_chicken() {
 
             this.initialX = x;
             this.initialY = y;
-            console.log(this.initialY);
             this.temp = 0;
+
+            document.addEventListener('keyup',(event) => {
+                if(event.code == this.key){
+                    if (this.keyPressed === false){
+                        this.keyPressed = true;
+                        this.jump();
+                    }
+                }
+            });
             
         }
         
@@ -102,24 +126,12 @@ function  fn_chicken() {
             this.chickenElement.style.position = "absolute";
             this.chickenElement.style.left = this.x + "px";
             this.chickenElement.style.top = this.y + "px";
-            this.chickenElement.style.border = "1px solid green";
-
-            chickenSkyyDiv.appendChild(this.chickenElement);
-
-            document.addEventListener('keyup',(event) => {
-                if(event.code == this.key){
-                    if (this.keyPressed === false){
-                        this.keyPressed = true;
-                        this.jump();
-                    }
-                }
-            })
+            chickenSkyyDiv.appendChild(this.chickenElement);  
 
         }
 
         update(){
         }
-
 
         jump(){
             let upTimerId = setInterval(() => {
@@ -137,26 +149,34 @@ function  fn_chicken() {
                     },20);
 
                 }
-                 //move up
+                //move up
                 this.y -= this.velocity;
                 this.chickenElement.style.top = this.y + 'px';
             },20);
+        }
+        
 
+        reset(){
+            this.x = this.initialX;
+            this.y = this.initialY;
+            this.chickenElement.style.left = this.x + "px";
+            this.chickenElement.style.top = this.y + "px";
         }
     }
 
   
 
     class Box{
-        constructor(x,y,bird){
+        constructor(x,y,color){
         this.x = x;
         this.y = y;
         this.width = 50;
         this.height = 50;
         this.speed = 10;
         this.initialX = x;
-        this.bird = bird
-        console.log(this.bird.y);
+        this.color = color;
+        this.initialX = x;
+        this.initialY = y;
         }
 
         draw() {
@@ -175,50 +195,118 @@ function  fn_chicken() {
     
         }
         update(){
-            if ( this.x < 0-this.width){
-                this.x = (Math.random() < 0.5 ? 800 : 900);
-                this.boxElement.style.left = this.x + "px";
-                // score++;
-                // scoreElement.innerHTML = score;
-            }
-            else{
-                this.x -= this.speed;
-                this.boxElement.style.left = this.x + "px";
+            if (state.current == state.gameIn){ 
+                if ( this.x < 0-this.width){
+                    this.x = (Math.random() < 0.5 ? 800 : 900);
+                    this.boxElement.style.left = this.x + "px";
+                }
+                else{
+                    this.x -= this.speed;
+                    this.boxElement.style.left = this.x + "px";
+                }
             }
         }
+
         checkCollision(){
-            if (pointsRectCollision(this,this.bird)){
-                // console.log("collision")
+            if (state.current == state.gameIn){ 
+                if (this.color = "blue"){
+                    if (pointsRectCollision(this,chicken1)){
+                        console.log("collision blue")
+                        chickenRedPoint++;
+                        chickenRedPointDiv.innerHTML = chickenRedPoint;
+                        state.current = state.gameOver;
+                    }
+                }
+                if(this.color = "red"){
+                    console.log(this,chicken2)
+                    if (pointsRectCollision(this,chicken2)){
+                        console.log("collision red")
+                        chickenBluePoint++;
+                        chickenBluePointDiv.innerHTML = chickenBluePoint;
+                        state.current = state.gameOver;
+                    }
+                }
             }
+        }
+
+        reset(){
+            this.x = this.initialX;
+            this.y = this.initialY;
+            this.boxElement.style.left = this.x + "px";
+            this.boxElement.style.top = this.y + "px";
         }
 
 
     }
 
     const obstacleBlueY = 170;
-    const obstacleRedY = 410;
+    const obstacleRedY = 420;
     let chicken1 = new Chicken(chickenWidth,chickenHeight,chickenX,chickenBlueY,jumpHeightBLueY,keyBlue,imgBlue);
     let chicken2 = new Chicken(chickenWidth,chickenHeight,chickenX,chickenRedY,jumpHeightRedY,keyRed,imgRed);
     chicken1.draw();
     chicken2.draw();
 
 
-    let box1 = new Box((Math.random() < 0.5 ? 800 : 850),obstacleBlueY,chicken1);
-    let box2 = new Box((Math.random() < 0.5 ? 900 : 950),obstacleRedY,chicken2);
+    let box1 = new Box((Math.random() < 0.5 ? 800 : 850),obstacleBlueY,"blue");
+    let box2 = new Box((Math.random() < 0.5 ? 900 : 950),obstacleRedY,"red");
     box1.draw();
     box2.draw();
 
-    function animation() {
-        chicken1.update();
-        box1.update();
-        box1.checkCollision()
-        box2.update();
-        box2.checkCollision()
-        requestAnimationFrame(animation)
+    // click event for switching 3 stage of screen of soccer game
+    chickenGameTopAreaDiv.addEventListener("click", function (event) {
+        console.log("i am click");
+        // whistleSound.play();
+        switch(state.current){
+            case state.getReady:
+                state.current = state.gameIn;
+                break;
+            case state.gameIn:
+                break;
+            case state.gameOver:
+                state.current = state.gameIn;
+                chicken1.reset();
+                chicken2.reset();
+                box1.reset();
+                box2.reset();
+                break;
+            default: 
+        }
+        if(state.current === state.gameIn)  whistleSound.play();
+    });
+
+    
+    function showInstruction() {
+        if (state.current === state.getReady){
+            chickenInstruction.style.display = "block";
+        }
+        else chickenInstruction.style.display = "none";
     }
+
+
+    function showBoard() {
+        if (state.current === state.gameOver){
+            chickenBoard.style.display = "block";
+        }
+        else chickenBoard.style.display = "none";
+    }
+      
+
+
+    function animation() {
+        showInstruction();
+        showBoard();
+        chicken1.update();
+        chicken2.update();
+        box1.update();
+        box1.checkCollision();
+        box2.update();
+        box2.checkCollision();
+        requestAnimationFrame(animation);
+    }
+
+
     animation();
 
 
 
 }
-
