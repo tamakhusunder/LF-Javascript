@@ -10,6 +10,7 @@ function fn_soccer() {
 
     const soccerInstruction = document.querySelector('.game-soccer-instruction');
     const soccerBoard = document.querySelector('.game-soccer-winnerBoard');
+    const soccerBoardline2Div= document.getElementById('soccer-winnerBoard-line2');
     const soccerBluePointDiv = document.querySelector('.soccer-point-blue');
     const soccerRedPointDiv = document.querySelector('.soccer-point-red');
 
@@ -160,6 +161,7 @@ function fn_soccer() {
                 console.log("post1 collision");
                 soccerRedPoint++;
                 soccerRedPointDiv.innerHTML = soccerRedPoint;
+                soccerBoardline2Div.innerHTML = "Red gains the point."
                 state.current = state.gameOver;
             
             }
@@ -167,6 +169,7 @@ function fn_soccer() {
                 console.log("post2 collision");
                 soccerBluePoint++;
                 soccerBluePointDiv.innerHTML = soccerBluePoint;
+                soccerBoardline2Div.innerHTML = "Blue gains the point."
                 state.current = state.gameOver;
             }
         }
