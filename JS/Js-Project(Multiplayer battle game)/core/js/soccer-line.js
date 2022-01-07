@@ -70,8 +70,8 @@ function fn_soccer() {
     }
 
 
-    let goalPost1 = new GoalPost(10,100,(0-5),(soccerCenterY/2)+50);
-    let goalPost2 = new GoalPost(10,100,(soccerBoundaryWidth-10)+4,(soccerCenterY/2)+50);
+    let goalPost1 = new GoalPost(10,200,(0-40),soccerCenterY/2);
+    let goalPost2 = new GoalPost(10,200,(soccerBoundaryWidth-10)+40,soccerCenterY/2);
     goalPost1.draw();
     goalPost2.draw();
 
@@ -106,22 +106,6 @@ function fn_soccer() {
 
         update(){
             if (state.current == state.gameIn){ 
-                if (this.x > soccerBoundaryWidth-this.width){
-                    this.x = soccerBoundaryWidth-2*this.width;
-                    this.ballElement.style.left = this.x + "px";
-                }
-                if (this.y > soccerBoundaryHeight-this.height){
-                    this.y = soccerBoundaryHeight-2*this.height;
-                    this.ballElement.style.top = this.y + "px";
-                }
-                if (this.x < 0){
-                    this.x = 0+this.width;
-                    this.ballElement.style.left = this.x + "px";
-                }
-                if (this.y < 0){
-                    this.y = 0+this.height;;
-                    this.ballElement.style.top = this.y + "px";
-                }
                 this.rotateBall();
                 this.checkBallPlayerCollision();
                 this.checkGoalPostCollision();
@@ -143,22 +127,33 @@ function fn_soccer() {
                 if ( dist1 <= this.radius+playerBlue.radius){
                     console.log("colide");
                     this.dx = ball.x > playerBlue.x ? 1 : -1;
-                    this.dy = ball.y > playerBlue.y ? 1 : -1;
                     this.x = this.x + this.roll * this.dx;
-                    this.y = this.y + this.roll * this.dy;
                     this.ballElement.style.left = this.x + 'px'; 
-                    this.ballElement.style.top = this.y + 'px'; 
                 }
                 let dist2 = getDistance(this.x,this.y,playerRed.x,playerRed.y)
                 if ( dist2 <= this.radius+playerRed.radius){
                     console.log("colide2");
                     this.dx = ball.x > playerRed.x ? 1 : -1; 
-                    this.dy = ball.y > playerRed.y ? 1 : -1;
                     this.x = this.x + this.roll * this.dx;
-                    this.y = this.y + this.roll * this.dy;
                     this.ballElement.style.left = this.x + 'px'; 
-                    this.ballElement.style.top = this.y + 'px'; 
                 }
+        }
+
+        checkWallCollision(){
+            if (this.x >  soccerBoundaryWidth-this.width) {
+                this.dx = -1;
+            }
+
+            if (this.y >soccerBoundaryHeight-this.height) {
+                this.dy = -1;
+            }
+
+            if (this.x < 0){
+                this.dx = 1;
+            }
+            if(this.y < 0){
+                this.dy = 1;
+            }
         }
 
         checkGoalPostCollision(){
@@ -282,9 +277,6 @@ function fn_soccer() {
         //move player in all direction
         movePlayer(){
             if (this.keyPressed == true){
-                //control the speed/velocity of player(donot go morethan 5 velocity)
-                if(this.velocity > 5) this.velocity = 3;
-                //face direction movement
                 if ((this.angle >= 360-extraAngle && this.angle <= 360) || (this.angle>=0 && this.angle<=0+extraAngle)){
                     this.velocity += this.walk;
                     this.x += this.velocity;
