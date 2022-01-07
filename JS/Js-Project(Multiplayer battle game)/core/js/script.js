@@ -43,6 +43,8 @@ function  fn_chicken() {
 
     const chickenInstruction = document.querySelector('.game-chicken-instruction');
     const chickenBoard = document.querySelector('.game-chicken-winnerBoard');
+    const chickenBoardLine1Div = document.getElementById('chicken-winnerBoard-line1');
+    const chickenBoardLine2Div = document.getElementById('chicken-winnerBoard-line2');
     const chickenBluePointDiv = document.querySelector('.chicken-point-blue');
     const chickenRedPointDiv = document.querySelector('.chicken-point-red');
 
@@ -67,7 +69,6 @@ function  fn_chicken() {
     const keyBlue = "KeyA";
     let chickenBluePoint = 0;
     const imgBlue = "core/assets/images/chickenrun/chicken-blue.png";
-
     const imgBlueArray = [
         "core/assets/images/chickenrun/chicken-blue.png",
         "core/assets/images/chickenrun/chicken-blue-jump.png"
@@ -94,8 +95,6 @@ function  fn_chicken() {
             this.height = height;
             this.x = x;
             this.y = y;
-            this.vy = 0;
-            this.run = 1;
             this.key = key;
             this.keyPressed = false;
             this.velocity = 10;
@@ -104,7 +103,6 @@ function  fn_chicken() {
 
             this.initialX = x;
             this.initialY = y;
-            this.temp = 0;
 
             document.addEventListener('keyup',(event) => {
                 if(event.code == this.key){
@@ -119,7 +117,7 @@ function  fn_chicken() {
         
         draw() {
             this.chickenElement = document.createElement("img");
-            this.chickenElement.src = this.img;
+            this.chickenElement.src = this.img[0];
             this.chickenElement.classList.add("chicken");
             this.chickenElement.style.width = this.width+ "px";
             this.chickenElement.style.height = this.height + "px";
@@ -146,12 +144,14 @@ function  fn_chicken() {
                         }
                         this.y += this.velocity;
                         this.chickenElement.style.top = this.y + 'px';
+                        this.chickenElement.src = this.img[0];
                     },20);
 
                 }
                 //move up
                 this.y -= this.velocity;
                 this.chickenElement.style.top = this.y + 'px';
+                this.chickenElement.src = this.img[1];
             },20);
         }
         
@@ -164,6 +164,11 @@ function  fn_chicken() {
         }
     }
 
+
+    let chicken1 = new Chicken(chickenWidth,chickenHeight,chickenX,chickenBlueY,jumpHeightBLueY,keyBlue,imgBlueArray);
+    let chicken2 = new Chicken(chickenWidth,chickenHeight,chickenX,chickenRedY,jumpHeightRedY,keyRed,imgRedArray);
+    chicken1.draw();
+    chicken2.draw();
   
 
     class Box{
@@ -173,8 +178,8 @@ function  fn_chicken() {
         this.width = 50;
         this.height = 50;
         this.speed = 10;
-        this.initialX = x;
         this.color = color;
+        this.frame = 1;
         this.initialX = x;
         this.initialY = y;
         }
@@ -190,7 +195,6 @@ function  fn_chicken() {
             this.boxElement.style.left = this.x + "px";
             this.boxElement.style.top = this.y + "px";
             this.boxElement.style.boder = "1px solid black";
-            this.boxElement.innerHTML=this.temp;
             chickenSkyyDiv.appendChild(this.boxElement)
     
         }
@@ -204,6 +208,9 @@ function  fn_chicken() {
                     this.x -= this.speed;
                     this.boxElement.style.left = this.x + "px";
                 }
+                 //increase speed of obstacle with time and frame increases
+                 this.frame++;
+                 if (this.frame % 1000 === 0) this.speed += 10;
             }
         }
 
@@ -214,6 +221,8 @@ function  fn_chicken() {
                         console.log("collision blue")
                         chickenRedPoint++;
                         chickenRedPointDiv.innerHTML = chickenRedPoint;
+                        chickenBoardLine1Div.innerHTML = "Blue Crashed !!!";
+                        chickenBoardLine2Div.innerHTML = "Red gains the Point";
                         state.current = state.gameOver;
                     }
                 }
@@ -223,6 +232,8 @@ function  fn_chicken() {
                         console.log("collision red")
                         chickenBluePoint++;
                         chickenBluePointDiv.innerHTML = chickenBluePoint;
+                        chickenBoardLine1Div.innerHTML = "Red Crashed !!!";
+                        chickenBoardLine2Div.innerHTML = "Blue gains the Point";
                         state.current = state.gameOver;
                     }
                 }
@@ -230,6 +241,8 @@ function  fn_chicken() {
         }
 
         reset(){
+            this.frame = 1;
+            this.speed = 10;
             this.x = this.initialX;
             this.y = this.initialY;
             this.boxElement.style.left = this.x + "px";
@@ -241,14 +254,10 @@ function  fn_chicken() {
 
     const obstacleBlueY = 170;
     const obstacleRedY = 420;
-    let chicken1 = new Chicken(chickenWidth,chickenHeight,chickenX,chickenBlueY,jumpHeightBLueY,keyBlue,imgBlue);
-    let chicken2 = new Chicken(chickenWidth,chickenHeight,chickenX,chickenRedY,jumpHeightRedY,keyRed,imgRed);
-    chicken1.draw();
-    chicken2.draw();
 
 
-    let box1 = new Box((Math.random() < 0.5 ? 800 : 850),obstacleBlueY,"blue");
-    let box2 = new Box((Math.random() < 0.5 ? 900 : 950),obstacleRedY,"red");
+    let box1 = new Box((Math.random() < 0.5 ? 800 : 950),obstacleBlueY,"blue");
+    let box2 = new Box((Math.random() < 0.5 ? 850 : 900),obstacleRedY,"red");
     box1.draw();
     box2.draw();
 
