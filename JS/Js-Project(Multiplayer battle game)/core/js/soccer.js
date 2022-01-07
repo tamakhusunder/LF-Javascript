@@ -1,3 +1,4 @@
+
 //fn_soccer
 function fn_soccer() {
     homePage.style.display = "none";
@@ -202,7 +203,7 @@ function fn_soccer() {
             this.initialX = x;
             this.initialY = y;
 
-            //player control event with key a and l
+            //player control event with key A and L
             document.addEventListener('keydown',(event) =>{
                 if(event.code == this.key){
                     this.keyPressed = true;
@@ -343,7 +344,6 @@ function fn_soccer() {
     // click event for switching 3 stage of screen of soccer game
     soccer.addEventListener("click", function (event) {
         // console.log("i am click");
-        whistleSound.play();
         switch(state.current){
             case state.getReady:
                 state.current = state.gameIn;
@@ -356,9 +356,10 @@ function fn_soccer() {
                 playerBlue.reset();
                 playerRed.reset();
                 break;
-        default: 
+            default: 
         }
-    })
+        if(state.current === state.gameIn)  whistleSound.play();
+    });
 
 
     function showInstruction() {
