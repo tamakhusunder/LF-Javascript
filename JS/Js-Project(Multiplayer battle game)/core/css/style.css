@@ -282,3 +282,61 @@
 .chicken{
     /* border: 1px solid green; */
 }
+
+
+/* ******** game-sumo ******** */
+.game3{
+    display: none;
+}
+
+.game-sumo{
+    background-color: green;
+    background-color: #FEEF9A;
+    height: 100vh;
+}
+
+.game-sumo-top{
+    width: 1300px;
+    height: 500px;
+    margin: 0 auto;
+    background-image: url("../assets/images/sumo/ringsumo.png");
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+    background-size: 100% 100%;
+}
+
+.sumo-border{
+    width: 350px;
+    height: 350px;
+    position: relative;
+    top:70px;
+    margin: 0 auto;
+    border: 10px solid #FEF3DF;
+    border-radius: 30px;
+}
+
+.gamer-sumo-points {
+    margin-top:1% ;
+    font-size: 30px;
+    color: white;
+    display: flex;
+    text-align: center;
+}
+.sumo-point-blue{
+    flex: 1;
+    background-color: rgb(40, 40, 173);
+    padding: 1%;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+.sumo-point-red{
+    flex: 1;
+    background-color: red;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 1%; 
+    border: 2px solid white;
+    border-radius: 20px;
+} 
