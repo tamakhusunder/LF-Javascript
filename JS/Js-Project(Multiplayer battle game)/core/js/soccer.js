@@ -1,35 +1,43 @@
-
-//fn_soccer
+/**
+ * Function for whole soccer game to play
+ */
 function fn_soccer() {
     homePage.style.display = "none";
     game1.style.display = "block";
 
-    const  soccer = document.querySelector('.game-soccer-top');
-    const  soccerBoundary = document.querySelector('.soccer-border');
+
+    /**
+     * Event handler for back to home page
+     */
+    gotoHomepage = document.getElementById("soccer-gotoHomePage");
+    gotoHomepage.addEventListener('click', function (event) {
+        let homepage = fn_homePage();
+    });
 
 
+    /**
+     * Accessing DOM of Soccer game
+     */
+    const soccerEntityControlDiv = document.querySelector(".game-soccer-entity-control");
+    const soccerStageControlDiv = document.getElementById("soccer-stage-control");
+    const soccer = document.querySelector('.game-soccer-top');
+    const soccerBoundary = document.querySelector('.soccer-border');
     const soccerInstruction = document.querySelector('.game-soccer-instruction');
     const soccerBoard = document.querySelector('.game-soccer-winnerBoard');
+    const soccerBoardline1Div= document.getElementById('soccer-winnerBoard-line1');
     const soccerBoardline2Div= document.getElementById('soccer-winnerBoard-line2');
+    const soccerBoardline2DivImg= document.getElementById('soccer-winnerBoard-line2-img');
     const soccerBluePointDiv = document.querySelector('.soccer-point-blue');
     const soccerRedPointDiv = document.querySelector('.soccer-point-red');
 
 
+    /**
+     * Soccer Game Constants and variable
+     */
     const soccerBoundaryWidth = 850;
     const soccerBoundaryHeight = 400;
     const soccerCenterX = soccerBoundaryWidth/2;    //425
     const soccerCenterY = soccerBoundaryHeight/2;   //200
-
-
-    // const ball = document.createElement('div');
-    // ball.style.width = 20 + 'px';
-    // ball.style.height = 20 + 'px';
-    // ball.style.position = 'absolute';
-    // ball.style.left = (soccerCenterX-10) + 'px';
-    // ball.style.top = (soccerCenterY-10) + 'px';
-    // ball.style.border = '1px solid blue';
-
-    // soccerBoundary.appendChild(ball);
     const state = {
         current : 0,
         getReady : 0,
@@ -47,6 +55,12 @@ function fn_soccer() {
     let initialRedY = initialBlueY;
     let soccerBluePoint = 0;
     let soccerRedPoint = 0;
+    let totalGamePoint = 2;
+    let goalPost1;
+    let goalPost2;
+    let ball;
+    let playerBlue;
+    let playerRed;
 
 
     class GoalPost{
@@ -57,7 +71,7 @@ function fn_soccer() {
             this.y = y;
         }
 
-        draw(){
+        draw() {
             this.goalPostElement = document.createElement('div');
             this.goalPostElement.classList.add("soccerGoalPost");
             this.goalPostElement.style.width = this.width + 'px';
@@ -70,14 +84,8 @@ function fn_soccer() {
     }
 
 
-    let goalPost1 = new GoalPost(10,100,(0-5),(soccerCenterY/2)+50);
-    let goalPost2 = new GoalPost(10,100,(soccerBoundaryWidth-10)+4,(soccerCenterY/2)+50);
-    goalPost1.draw();
-    goalPost2.draw();
-
-
     class Ball{
-        constructor(){
+        constructor() {
             this.width = 60;
             this.height = 60;
             this.x = soccerCenterX-(this.width/2);  //395
@@ -104,7 +112,7 @@ function fn_soccer() {
                 soccerBoundary.appendChild(this.ballElement);
         }
 
-        update(){
+        update() {
             if (state.current == state.gameIn){ 
                 if (this.x > soccerBoundaryWidth-this.width){
                     this.x = soccerBoundaryWidth-2*this.width;
@@ -123,12 +131,12 @@ function fn_soccer() {
                     this.ballElement.style.top = this.y + "px";
                 }
                 this.rotateBall();
-                this.checkBallPlayerCollision();
+                this.checkBallPlayerCollisionForRoll();
                 this.checkGoalPostCollision();
             }
         }
 
-        rotateBall(){
+        rotateBall() {
                 if((this.angleIt+1)%(360+2) == 0){
                     this.angleIt=0;
                 }
@@ -138,7 +146,7 @@ function fn_soccer() {
             
         }
 
-        checkBallPlayerCollision(){
+        checkBallPlayerCollisionForRoll(){
                 let dist1 = getDistance(this.x,this.y,playerBlue.x,playerBlue.y)
                 if ( dist1 <= this.radius+playerBlue.radius){
                     console.log("colide");
@@ -162,20 +170,49 @@ function fn_soccer() {
         }
 
         checkGoalPostCollision(){
+            soccerRedPointDiv.innerHTML = soccerRedPoint;
+            soccerBluePointDiv.innerHTML = soccerBluePoint;
             if (pointsRectCollision(this,goalPost1)) {
                 console.log("post1 collision");
                 soccerRedPoint++;
                 soccerRedPointDiv.innerHTML = soccerRedPoint;
-                soccerBoardline2Div.innerHTML = "Red gains the point."
-                state.current = state.gameOver;
-            
+                //condition for end point winner in game(total point to be collect 2 or 3)
+                if (soccerRedPoint === totalGamePoint){
+                    soccerBoardline1Div.innerHTML = "Red won the Game";
+                    soccerBoardline2Div.innerHTML = "";
+                    soccerBoardline2DivImg.style.display = "block";
+                    soccerRedPoint = 0;
+                    soccerBluePoint = 0;
+                    state.current = state.gameOver;
+                    homeRedPoint++;
+                }
+                else{
+                    soccerBoardline1Div.innerHTML = "Goal ! ! !";
+                    soccerBoardline2Div.innerHTML = "Red gains the point.";
+                    soccerBoardline2DivImg.style.display = "none";
+                    state.current = state.gameOver;
+                }
             }
-            else if (pointsRectCollision(this,goalPost2)) {
+            if (pointsRectCollision(this,goalPost2)) {
                 console.log("post2 collision");
                 soccerBluePoint++;
                 soccerBluePointDiv.innerHTML = soccerBluePoint;
-                soccerBoardline2Div.innerHTML = "Blue gains the point."
-                state.current = state.gameOver;
+                //condition for end point winner in game(total point to be collect 2 or 3)
+                if (soccerBluePoint === totalGamePoint){
+                    soccerBoardline1Div.innerHTML = "Blue won the Game";
+                    soccerBoardline2Div.innerHTML = "";
+                    soccerBoardline2DivImg.style.display = "block";
+                    soccerRedPoint = 0;
+                    soccerBluePoint = 0;
+                    state.current = state.gameOver;
+                    homeBluePoint++;
+                }
+                else{
+                    soccerBoardline1Div.innerHTML = "Goal ! ! !";
+                    soccerBoardline2Div.innerHTML = "Blue gains the point.";
+                    soccerBoardline2DivImg.style.display = "none";
+                    state.current = state.gameOver;
+                }
             }
         }
 
@@ -186,10 +223,6 @@ function fn_soccer() {
             this.ballElement.style.top = this.y + "px";
         }
     }
-
-
-    let ball = new Ball();
-    ball.draw();
 
 
     class Player{
@@ -207,7 +240,6 @@ function fn_soccer() {
             this.walk = walk;
             this.keyPressed = false;
             this.angleIt = 0;
-
             this.initialX = x;
             this.initialY = y;
 
@@ -239,6 +271,7 @@ function fn_soccer() {
             soccerBoundary.appendChild(this.playerElement);
             
         }
+
         update(){
             if( state.current == state.gameIn)
             this.limitPlayerToBoundarywithMovement() ; 
@@ -266,8 +299,7 @@ function fn_soccer() {
                 this.playerElement.style.top = this.y + "px";
             }
             if (this.keyPressed == true) this.movePlayer();
-            else this.rotatePlayer();
-                
+            else this.rotatePlayer();   
         }
 
         rotatePlayer(){
@@ -345,24 +377,45 @@ function fn_soccer() {
         }
     }
 
+    /**
+     * draw the instances of class for once only
+     */
+    if (clickSoccerOnce === false){
+        goalPost1 = new GoalPost(10,100,(0-5),(soccerCenterY/2)+50);
+        goalPost2 = new GoalPost(10,100,(soccerBoundaryWidth-10)+4,(soccerCenterY/2)+50);
+        goalPost1.draw();
+        goalPost2.draw();
+        
+        ball = new Ball();
+        ball.draw();
 
-    let playerBlue = new Player(playerWidth,playerHeight,initialBlueX,initialBlueY,'soccerBluePlayer','KeyA',1,velocity,walk);
-    let playerRed = new Player(playerWidth,playerHeight,initialRedX,initialRedY,'soccerRedPlayer','KeyL',-1,velocity,walk);
-    playerBlue.draw();
-    playerRed.draw();
+        playerBlue = new Player(playerWidth,playerHeight,initialBlueX,initialBlueY,'soccerBluePlayer','KeyA',1,velocity,walk);
+        playerRed = new Player(playerWidth,playerHeight,initialRedX,initialRedY,'soccerRedPlayer','KeyL',-1,velocity,walk);
+        playerBlue.draw();
+        playerRed.draw();
+        clickSoccerOnce = true;
+    }
+    else{
+        ball.reset();
+        playerBlue.reset();
+        playerRed.reset();
+    }
+    
 
-
-    // click event for switching 3 stage of screen of soccer game
-    soccer.addEventListener("click", function (event) {
-        // console.log("i am click");
+    /**
+     * Click event for switching 3 stage of screen of soccer game
+     */
+    soccerStageControlDiv.addEventListener("click", function (event) {
         switch(state.current){
             case state.getReady:
                 state.current = state.gameIn;
+                soccerEntityControlDiv.style.display = "none";
                 break;
             case state.gameIn:
                 break;
             case state.gameOver:
                 state.current = state.gameIn;
+                soccerEntityControlDiv.style.display = "none";
                 ball.reset();
                 playerBlue.reset();
                 playerRed.reset();
@@ -373,24 +426,35 @@ function fn_soccer() {
     });
 
 
+    /**
+     * Function for showing instruction for player
+     */
     function showInstruction() {
         if (state.current === state.getReady){
             soccerInstruction.style.display = "block";
+            soccerEntityControlDiv.style.display = "block";
         }
-        else soccerInstruction.style.display = "none";
+        else {
+            soccerInstruction.style.display = "none";
+        }
     }
 
 
+    /**
+     * Function for showing showboard for points and winner
+     */
     function showBoard() {
         if (state.current === state.gameOver){
             soccerBoard.style.display = "block";
+            soccerEntityControlDiv.style.display = "block";
         }
         else soccerBoard.style.display = "none";
     }
 
-
-    function animation () {
-        // console.log(state.current)
+    /**
+     * Function for showing soccer animation
+     */
+    function animation() {
         showInstruction();
         showBoard();
         playerBlue.update();
@@ -398,8 +462,8 @@ function fn_soccer() {
         ball.update();
         requestAnimationFrame(animation);
     }
-
-
+    
+    
     animation();
 
 }
