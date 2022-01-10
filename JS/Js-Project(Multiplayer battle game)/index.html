@@ -49,15 +49,22 @@
                 <div class="soccer-border">
                     <div class="game-soccer-instruction">
                         <h1>Instruction</h1>
+                        <p>Collect 3 points to win the game.</p>
                         <p>Player Blue : Press 'A' to control the player.</p>
                         <p>Player Red : Press 'L' to control the player.</p>
                         <p>Hit the ball to score the goal.</p>
-                        <p>Click to start</p>
                     </div>
                     <div class="game-soccer-winnerBoard">
-                        <h1 id="soccer-winnerBoard-line1">Goal ! ! !</h1>
-                        <p id="soccer-winnerBoard-line2"></p>
-                        <p>Click to start</p>
+                        <h1 id="soccer-winnerBoard-line1"></h1>
+                        <p id="soccer-winnerBoard-line2">
+                            <div id="soccer-winnerBoard-line2-img"></div>
+                        </p>
+                    </div>
+                    <div class="game-soccer-entity-control">
+                        <img src="core/assets/images/home-btn.png" id="soccer-gotoHomePage">
+                        <img src="core/assets/images/play.png" id="soccer-stage-control">
+                        <!-- <div id="soccer-stage-control">Click to start</div>
+                        <div id="soccer-gotoHomePage">HomePage click</div> -->
                     </div>
                 </div>
             </div>
@@ -106,9 +113,6 @@
                 </div>
             </div>
         </div>
-        
-
-
     </div>
 
     <div class="game3">
@@ -116,6 +120,11 @@
             <div class="game-sumo-top">   
                 <div class="sumo-border">
                     <div class="game-sumo-instruction">
+                        <h1>Instruction</h1>
+                        <p>Player Blue : Press 'A' to control the blue sumo.</p>
+                        <p>Player Red : Press 'L' to control the red sumo.</p>
+                        <p>Push the opponent out of the ring to win the game.</p>
+                        <p>Click to start</p>
                     </div>
                     <div class="game-sumo-winnerBoard">
                         <h1 id="sumo-winnerBoard-line1"></h1>
@@ -134,6 +143,19 @@
         </div>
     </div>
 
+    <div class="game4">
+        <div class="game-fish">
+            <div class="game-fish-top">   
+                <div class="fish-border">
+                </div>
+            </div>
+
+            <div class="game-fish-bottom">
+
+            </div>
+        </div>
+    </div>
+
 
     <div class="game-over">
 
@@ -141,6 +163,10 @@
     
 <script src="core/js/utlis.js"></script>
 <script src="core/js/soccer.js"></script>
+<script src="core/js/chickenJump.js"></script>
+<script src="core/js/sumo.js"></script>
+<script src="core/js/catchTheFish.js"></script>
 <script src="core/js/script.js"></script>
+
 </body>
 </html>
