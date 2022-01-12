@@ -1,0 +1,126 @@
+
+
+/* ******** game-catchTheFish ******** */
+.game4{
+}
+
+.game-fish{
+    background-color: #D59651;
+    height: 100vh;
+    background-image: url("../assets/images/catchTheFish/backgroundcat.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+}
+
+.game-fish-top{
+    width: 1300px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.game-fish-top-table{
+    width: 820px;
+    height: 430px;
+    margin: 0 auto;
+    background-image: url("../assets/images/catchTheFish/table.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.fish-border{
+    overflow: hidden;
+    width: 800px;
+    height: 400px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.game-fish-instruction,.game-fish-winnerBoard{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 5px solid white;
+    border-radius: 30px;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    background-color: #E8E2B2;
+    padding: 5%;
+    text-align:  center;
+}
+
+.game-fish-instruction p{
+    font-size: 20px;
+}
+
+
+#fish-winnerBoard-line2-img{
+    height: 100px;
+    background-image: url("../assets/images/winner.gif");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#fish-winnerBoard-line2-img{
+    height: 100px;
+    background-image: url("../assets/images/winner.gif");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.game-fish-entity-control{
+    width: 30%;
+    height: 65px;
+    margin: 0 auto;
+}
+
+#fish-gotoHomePage-btn{
+    float: left;
+    cursor: pointer;
+    width: 18%;
+    height: 100%;
+    background-image: url("../assets/images/home-btn.png");
+    background-size: 100% 100%;
+}
+
+#fish-state-control-btn{
+    float: right;
+    cursor: pointer;
+    height: 100%;
+    width: 18%;
+    background-image: url("../assets/images/play.png");
+    background-size: 100% 100%;
+}
+
+#fish-state-control-btn:hover,#fish-gotoHomePage-btn:hover{
+    transform: scale(1.2); 
+}
+
+.game-fish-points {
+    margin-top:1% ;
+    font-size: 30px;
+    color: white;
+    display: flex;
+    text-align: center;
+}
+
+.fish-point-blue{
+    flex: 1;
+    background-color: rgb(40, 40, 173);
+    padding: 1%;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+.fish-point-red{
+    flex: 1;
+    background-color: red;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 1%; 
+    border: 2px solid white;
+    border-radius: 20px;
+} 
+
