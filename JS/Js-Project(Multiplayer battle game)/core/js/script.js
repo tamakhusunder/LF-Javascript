@@ -113,7 +113,7 @@ function fn_catchTheFish() {
     let extendRedHandHeight = extendBlueHandHeight;
     let fishBluePoint = 0;
     let fishRedPoint = 0;
-    let totalGamePoint = 2;
+    let totalGamePoint = 3;
     const blueHandImg = "core/assets/images/catchTheFish/longblue.png";
     const redHandImg = "core/assets/images/catchTheFish/longred.png";
     const fishImgArray = [
@@ -144,7 +144,6 @@ function fn_catchTheFish() {
             this.fishElement.style.top = this.y + 'px';
             setTimeout(() => {
                 fishGameBoundaryDiv.appendChild(this.fishElement);
-                console.log(this.imgIndex)
             },1000);
             
         }
@@ -160,7 +159,6 @@ function fn_catchTheFish() {
                     this.fishElement.style.left = this.x +"px";
                     this.fishElement.style.top = this.y +"px";
                     this.fishElement.src = fishImgArray[this.imgIndex];
-                    console.log(this.imgIndex);
                     this.fishElement.style.display = 'block';
                 } 
                 else {
@@ -217,27 +215,30 @@ function fn_catchTheFish() {
             fishGameBoundaryDiv.appendChild(this.handElement); 
         }
 
-        handMovement(){
-            let upTimerId = setInterval(() => {
-                this.checkHandFishCollision();
-                //move down for red or move down for blue
-                if (this.y === this.extendHandLimit){
-                    clearInterval(upTimerId);
+        handMovement(){ 
+                let upTimerId = setInterval(() => {
+                    if (state.current == state.gameIn){ 
+                        this.checkHandFishCollision();
+                    }
+                    //move down for red or move down for blue
+                    if (this.y === this.extendHandLimit){
+                        clearInterval(upTimerId);
 
-                    let downTimeId = setInterval(() => {
-                        if (this.y === (this.initialY-this.velocity)){
-                            clearInterval(downTimeId);
-                            this.keyPressed = false;
-                        }
-                        this.y += this.velocity;
-                        this.handElement.style[this.propertyName] = this.y + 'px';
-                    },20);
+                        let downTimeId = setInterval(() => {
+                            if (this.y === (this.initialY-this.velocity)){
+                                clearInterval(downTimeId);
+                                this.keyPressed = false;
+                            }
+                            this.y += this.velocity;
+                            this.handElement.style[this.propertyName] = this.y + 'px';
+                        },20);
 
-                }
-                //move up for red or move down for blue
-                this.y -= this.velocity;
-                this.handElement.style[this.propertyName] = this.y + 'px';
-            },20);
+                    }
+                    //move up for red or move down for blue
+                    this.y -= this.velocity;
+                    this.handElement.style[this.propertyName] = this.y + 'px';
+                },20);
+            
         }
         
         checkHandFishCollision(){
@@ -254,6 +255,10 @@ function fn_catchTheFish() {
                         fishBluePoint--;
                     }
                     fishBluePointDiv.innerHTML = fishBluePoint;
+                    if (fishBluePoint === totalGamePoint){
+                        state.current = state.gameOver;
+                        fishBluePoint = 0;
+                    }
                 }
             }
             if (this.propertyName === 'top'){
@@ -269,6 +274,10 @@ function fn_catchTheFish() {
                         fishRedPoint--;
                     }
                     fishRedPointDiv.innerHTML = fishRedPoint;
+                    if (fishRedPoint === totalGamePoint){
+                        state.current = state.gameOver;
+                        fishRedPoint = 0;
+                    }
                 }
             }
 
@@ -280,10 +289,51 @@ function fn_catchTheFish() {
     let handRed = new PlayerHand("top",playerHandWidth,playerHandHeight,initialRedX,initialRedY,"KeyL",extendRedHandHeight,redHandImg);
     handBlue.drawHand();
     handRed.drawHand();
-    
+
+    // click event for switching 3 stage of screen of fish game
+    fishGameTopAreaDiv.addEventListener("click", function (event) {
+        console.log("i am click");
+        switch(state.current){
+            case state.getReady:
+                state.current = state.gameIn;
+                break;
+            case state.gameIn:
+                break;
+            case state.gameOver:
+                state.current = state.gameIn;
+                fishBluePointDiv.innerHTML = fishBluePoint;
+                fishRedPointDiv.innerHTML = fishRedPoint;
+                break;
+            default: 
+        }
+        if(state.current === state.gameIn)  whistleSound.play();
+    });
+
+    function showInstruction() {
+        if (state.current === state.getReady){
+            fishInstruction.style.display = "block";
+        }
+        else fishInstruction.style.display = "none";
+    }
 
 
-    
+    function showBoard() {
+        if (state.current === state.gameOver){
+            fishBoard.style.display = "block";
+        }
+        else fishBoard.style.display = "none";
+    }
+     
+
+    function animation(){
+        console.log(state.current);
+        showInstruction();
+        showBoard();
+        requestAnimationFrame(animation);
+    }
+
+    animation();
+
 
 }
 
