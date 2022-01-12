@@ -37,8 +37,6 @@ function fn_sumo() {
     let sumoRedPoint = 0;
 
 
-    
-
     class PlayerBlue{
         constructor(width,height,x,y,name,img,key,velocity,walk){
             this.width = width;
@@ -56,7 +54,6 @@ function fn_sumo() {
             this.angleIt = 0;
             this.dx = 1;
             this.dy = 1;
-
             this.initialX = x;
             this.initialY = y;
 
@@ -102,7 +99,7 @@ function fn_sumo() {
         checkPlayerCollisionForPush(){
             let distance = getDistance(this.x,this.y,playerRed.x,playerRed.y);
             if (distance <= this.radius + playerRed.radius){
-                console.log("collision--blue hit first");
+                // console.log("collision--blue hit first");
                 this.dx = playerRed.x > this.x ? 1 : -1;
                 this.dy = playerRed.y > this.y ? 1 : -1;
                 playerRed.x = playerRed.x + this.pushValue * this.dx;
@@ -115,7 +112,7 @@ function fn_sumo() {
         checkRingCollision(){
             if (this.x > sumoBoundaryWidth-this.width || this.y > sumoBoundaryHeight-this.height
                 || this.x < 0 - this.width/3 || this.y < 0 - this.width/3){
-                    console.log("collison boundary blue");
+                    // console.log("collison boundary blue");
                     sumoRedPoint++;
                     sumoRedPointDiv.innerHTML = sumoRedPoint;
                     sumoBoardLine1Div.innerHTML = "Blue Out of Ring";
@@ -262,7 +259,7 @@ function fn_sumo() {
         checkPlayerCollisionForPush(){
             let distance = getDistance(this.x,this.y,playerBlue.x,playerBlue.y);
             if (distance <= this.radius + playerBlue.radius){
-                console.log("collision-red first hit");
+                // console.log("collision-red first hit");
                 this.dx = playerBlue.x > this.x ? 1 : -1;
                 this.dy = playerBlue.y > this.y ? 1 : -1;
                 playerBlue.x = playerBlue.x + this.pushValue * this.dx;
@@ -275,7 +272,7 @@ function fn_sumo() {
         checkRingCollision(){
             if (this.x > sumoBoundaryWidth-this.width || this.y > sumoBoundaryHeight-this.height
                 || this.x < 0 - this.width/3 || this.y < 0 - this.width/3){
-                    console.log("collison boundary red");
+                    // console.log("collison boundary red");
                     sumoBluePoint++;
                     sumoBluePointDiv.innerHTML = sumoBluePoint;
                     sumoBoardLine1Div.innerHTML = "Red Out of Ring";
@@ -360,16 +357,15 @@ function fn_sumo() {
         }
     }
 
-
     
     let playerBlue = new PlayerBlue(playerWidth,playerHeight,initialBlueX,initialBlueY,'sumoBluePlayer',imgBlue,'KeyA',velocity,walk);
     let playerRed = new PlayerRed(playerWidth,playerHeight,initialRedX,initialRedY,'sumoRedPlayer',imgRed,'KeyL',velocity,walk);
     playerBlue.draw();
     playerRed.draw();
 
+
     // click event for switching 3 stage of screen of sumo game
     sumoGameTopAreaDiv.addEventListener("click", function (event) {
-        // console.log("i am click");
         switch(state.current){
             case state.getReady:
                 state.current = state.gameIn;
