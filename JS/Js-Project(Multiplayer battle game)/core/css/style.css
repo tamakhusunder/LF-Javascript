@@ -393,3 +393,85 @@
     border: 2px solid white;
     border-radius: 20px;
 } 
+
+
+
+
+
+/* ******** game-catchTheFish ******** */
+.game4{
+    /* display: none; */
+}
+
+.game-fish{
+    background-color: #D59651;
+    height: 100vh;
+    background-image: url("../assets/images/catchTheFish/backgroundcat.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+}
+
+.game-fish-top{
+    width: 1300px;
+    height: 500px;
+    margin: 0 auto;
+    /* border: 1px solid red; */
+}
+
+.game-fish-top-table{
+    width: 820px;
+    height: 430px;
+    margin: 0 auto;
+    background-image: url("../assets/images/catchTheFish/table.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+
+.fish-border{
+    overflow: hidden;
+    width: 800px;
+    height: 400px;
+    position: relative;
+    margin: 0 auto;
+}
+
+
+.game-fish-points {
+    margin-top:1% ;
+    font-size: 30px;
+    color: white;
+    display: flex;
+    text-align: center;
+}
+
+.fish-point-blue{
+    flex: 1;
+    background-color: rgb(40, 40, 173);
+    padding: 1%;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+.fish-point-red{
+    flex: 1;
+    background-color: red;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 1%; 
+    border: 2px solid white;
+    border-radius: 20px;
+} 
+
+
+.fish{
+    /* background-image: url('../assets/images/catchTheFish/fish.png'); */
+    /* background-size: 100% 100%; */
+}
+
+/* .hand{
+    background-image: url('../assets/images/catchTheFish/longbluehand.png');
+
+} */
