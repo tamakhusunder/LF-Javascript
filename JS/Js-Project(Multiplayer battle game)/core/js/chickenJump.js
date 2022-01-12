@@ -7,7 +7,6 @@ function  fn_chicken() {
     const chickenGameTopAreaDiv = document.querySelector(".game-chicken-top");
     const chickenGameBoundaryDiv= document.querySelector(".game-chicken-border");
     const chickenSkyyDiv= document.querySelector(".chicken-border-sky");
-
     const chickenInstruction = document.querySelector('.game-chicken-instruction');
     const chickenBoard = document.querySelector('.game-chicken-winnerBoard');
     const chickenBoardLine1Div = document.getElementById('chicken-winnerBoard-line1');
@@ -16,7 +15,6 @@ function  fn_chicken() {
     const chickenRedPointDiv = document.querySelector('.chicken-point-red');
 
 
-  
     const state = {
         current : 0,
         getReady : 0,
@@ -27,7 +25,6 @@ function  fn_chicken() {
     const chickenGameBoundaryHeight = 250;
     const chickenGameSkyHeight = 220;
     const chickenGameFooterHeight = chickenGameBoundaryHeight-chickenGameSkyHeight; //30
-
     const chickenWidth = 50;
     const chickenHeight = 60;
     const chickenX = 2;
@@ -40,8 +37,6 @@ function  fn_chicken() {
         "core/assets/images/chickenrun/chicken-blue.png",
         "core/assets/images/chickenrun/chicken-blue-jump.png"
     ];
-
-    
     const chickenRedY = 410;
     const jumpHeightRedY = chickenRedY - 130;
     const keyRed = "KeyL"; 
@@ -51,9 +46,6 @@ function  fn_chicken() {
         "core/assets/images/chickenrun/chicken-red.png",
         "core/assets/images/chickenrun/chicken-red-jump.png"
     ];
-
-    
-
 
 
     class Chicken{
@@ -121,7 +113,6 @@ function  fn_chicken() {
                 this.chickenElement.src = this.img[1];
             },20);
         }
-        
 
         reset(){
             this.x = this.initialX;
@@ -165,6 +156,7 @@ function  fn_chicken() {
             chickenSkyyDiv.appendChild(this.boxElement)
     
         }
+
         update(){
             if (state.current == state.gameIn){ 
                 if ( this.x < 0-this.width){
@@ -185,7 +177,6 @@ function  fn_chicken() {
             if (state.current == state.gameIn){ 
                 if (this.color = "blue"){
                     if (pointsRectCollision(this,chicken1)){
-                        console.log("collision blue")
                         chickenRedPoint++;
                         chickenRedPointDiv.innerHTML = chickenRedPoint;
                         chickenBoardLine1Div.innerHTML = "Blue Crashed !!!";
@@ -194,9 +185,7 @@ function  fn_chicken() {
                     }
                 }
                 if(this.color = "red"){
-                    console.log(this,chicken2)
                     if (pointsRectCollision(this,chicken2)){
-                        console.log("collision red")
                         chickenBluePoint++;
                         chickenBluePointDiv.innerHTML = chickenBluePoint;
                         chickenBoardLine1Div.innerHTML = "Red Crashed !!!";
@@ -219,6 +208,7 @@ function  fn_chicken() {
 
     }
 
+
     const obstacleBlueY = 170;
     const obstacleRedY = 420;
 
@@ -228,9 +218,9 @@ function  fn_chicken() {
     box1.draw();
     box2.draw();
 
+
     // click event for switching 3 stage of screen of chicken game
     chickenGameTopAreaDiv.addEventListener("click", function (event) {
-        console.log("i am click");
         // whistleSound.play();
         switch(state.current){
             case state.getReady:
@@ -265,7 +255,6 @@ function  fn_chicken() {
         }
         else chickenBoard.style.display = "none";
     }
-      
 
 
     function animation() {
@@ -282,7 +271,4 @@ function  fn_chicken() {
 
 
     animation();
-
-
-
 }

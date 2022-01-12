@@ -1,0 +1,95 @@
+
+/* ******** game-Chicken-run ******** */
+.game2{
+}
+
+.game-chicken{
+    height: 100vh;
+    background-image: url("../assets/images/chickenrun/wallg.jpeg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.game-chicken-top{
+    width: 1300px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.chicken-border{
+    overflow: hidden;
+    width: 800px;
+    height: 500px;
+    position: relative;
+    margin: 0 auto;
+    background-color: #696969;
+    box-shadow: 5px 5px 10px 10px rgba(0,0,0,0.5); 
+}
+
+.game-chicken-instruction,.game-chicken-winnerBoard{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 5px solid white;
+    border-radius: 30px;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    background-color: #E8E2B2;
+    padding: 5%;
+    text-align:  center;
+    display: none;
+}
+
+.game-chicken-instruction p{
+    font-size: 20px;
+}
+
+.chicken-blue-border{
+    height: 250px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.chicken-red-border{
+    height: 250px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.chicken-border-sky{
+    height: 220px;
+}
+
+.chicken-border-footpath{
+    height: 30px;
+    background-image: url("../assets/images/chickenrun/chicken-ground.png");
+}
+
+.game-chicken-points{
+    margin-top:1% ;
+    font-size: 30px;
+    color: white;
+    display: flex;
+    text-align: center;
+}
+
+.chicken-point-blue{
+    flex: 1;
+    background-color: rgb(40, 40, 173);
+    padding: 1%;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+.chicken-point-red{
+    flex: 1;
+    background-color: red;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 1%; 
+    border: 2px solid white;
+    border-radius: 20px;
+} 
+
