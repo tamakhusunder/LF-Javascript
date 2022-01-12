@@ -1,5 +1,5 @@
 /**
- * Function for whole soccer game to play
+ * Whole Function for soccer game 
  */
 function fn_soccer() {
     homePage.style.display = "none";
@@ -19,7 +19,7 @@ function fn_soccer() {
      * Accessing DOM of Soccer game
      */
     const soccerEntityControlDiv = document.querySelector(".game-soccer-entity-control");
-    const soccerStageControlDiv = document.getElementById("soccer-stage-control");
+    const soccerStateControlDiv = document.getElementById("soccer-stage-control");
     const soccer = document.querySelector('.game-soccer-top');
     const soccerBoundary = document.querySelector('.soccer-border');
     const soccerInstruction = document.querySelector('.game-soccer-instruction');
@@ -56,6 +56,9 @@ function fn_soccer() {
     let soccerBluePoint = 0;
     let soccerRedPoint = 0;
     let totalGamePoint = 2;
+
+
+    //hoisting instances variable name of class
     let goalPost1;
     let goalPost2;
     let ball;
@@ -63,6 +66,7 @@ function fn_soccer() {
     let playerRed;
 
 
+    /** Class representing for Goal Post. */
     class GoalPost{
         constructor(width,height,x,y){
             this.width = width;
@@ -71,7 +75,7 @@ function fn_soccer() {
             this.y = y;
         }
 
-        draw() {
+        drawGoalPost() {
             this.goalPostElement = document.createElement('div');
             this.goalPostElement.classList.add("soccerGoalPost");
             this.goalPostElement.style.width = this.width + 'px';
@@ -84,6 +88,7 @@ function fn_soccer() {
     }
 
 
+    /** Class representing for Ball. */
     class Ball{
         constructor() {
             this.width = 60;
@@ -100,7 +105,7 @@ function fn_soccer() {
             this.initialY = soccerCenterY-(this.height/2);
         }
 
-        draw() {
+        drawBall() {
                 this.ballElement = document.createElement('div');
                 this.ballElement.classList.add("soccerBall");
                 this.ballElement.style.width = this.width + 'px';
@@ -112,7 +117,7 @@ function fn_soccer() {
                 soccerBoundary.appendChild(this.ballElement);
         }
 
-        update() {
+        updateBall() {
             if (state.current == state.gameIn){ 
                 if (this.x > soccerBoundaryWidth-this.width){
                     this.x = soccerBoundaryWidth-2*this.width;
@@ -149,7 +154,6 @@ function fn_soccer() {
         checkBallPlayerCollisionForRoll(){
                 let dist1 = getDistance(this.x,this.y,playerBlue.x,playerBlue.y)
                 if ( dist1 <= this.radius+playerBlue.radius){
-                    console.log("colide");
                     this.dx = ball.x > playerBlue.x ? 1 : -1;
                     this.dy = ball.y > playerBlue.y ? 1 : -1;
                     this.x = this.x + this.roll * this.dx;
@@ -159,7 +163,6 @@ function fn_soccer() {
                 }
                 let dist2 = getDistance(this.x,this.y,playerRed.x,playerRed.y)
                 if ( dist2 <= this.radius+playerRed.radius){
-                    console.log("colide2");
                     this.dx = ball.x > playerRed.x ? 1 : -1; 
                     this.dy = ball.y > playerRed.y ? 1 : -1;
                     this.x = this.x + this.roll * this.dx;
@@ -173,7 +176,6 @@ function fn_soccer() {
             soccerRedPointDiv.innerHTML = soccerRedPoint;
             soccerBluePointDiv.innerHTML = soccerBluePoint;
             if (pointsRectCollision(this,goalPost1)) {
-                console.log("post1 collision");
                 soccerRedPoint++;
                 soccerRedPointDiv.innerHTML = soccerRedPoint;
                 //condition for end point winner in game(total point to be collect 2 or 3)
@@ -194,7 +196,6 @@ function fn_soccer() {
                 }
             }
             if (pointsRectCollision(this,goalPost2)) {
-                console.log("post2 collision");
                 soccerBluePoint++;
                 soccerBluePointDiv.innerHTML = soccerBluePoint;
                 //condition for end point winner in game(total point to be collect 2 or 3)
@@ -225,6 +226,7 @@ function fn_soccer() {
     }
 
 
+    /** Class representing for Player */
     class Player{
         constructor(width,height,x,y,name,key,direction,velocity,walk){
             this.width = width;
@@ -259,7 +261,7 @@ function fn_soccer() {
 
         }
 
-        draw() {
+        drawPlayer() {
             this.playerElement = document.createElement('div');
             this.playerElement.classList.add(this.name);
             this.playerElement.style.width = this.width + 'px';
@@ -272,7 +274,7 @@ function fn_soccer() {
             
         }
 
-        update(){
+        updatePlayer(){
             if( state.current == state.gameIn)
             this.limitPlayerToBoundarywithMovement() ; 
         }
@@ -380,20 +382,20 @@ function fn_soccer() {
     /**
      * draw the instances of class for once only
      */
-    if (clickSoccerOnce === false){
+    if (clickHomeSoccerOnce === false){
         goalPost1 = new GoalPost(10,100,(0-5),(soccerCenterY/2)+50);
         goalPost2 = new GoalPost(10,100,(soccerBoundaryWidth-10)+4,(soccerCenterY/2)+50);
-        goalPost1.draw();
-        goalPost2.draw();
-        
+        goalPost1.drawGoalPost();
+        goalPost2.drawGoalPost();
+
         ball = new Ball();
-        ball.draw();
+        ball.drawBall();
 
         playerBlue = new Player(playerWidth,playerHeight,initialBlueX,initialBlueY,'soccerBluePlayer','KeyA',1,velocity,walk);
         playerRed = new Player(playerWidth,playerHeight,initialRedX,initialRedY,'soccerRedPlayer','KeyL',-1,velocity,walk);
-        playerBlue.draw();
-        playerRed.draw();
-        clickSoccerOnce = true;
+        playerBlue.drawPlayer();
+        playerRed.drawPlayer();
+        clickHomeSoccerOnce = true;
     }
     else{
         ball.reset();
@@ -405,7 +407,7 @@ function fn_soccer() {
     /**
      * Click event for switching 3 stage of screen of soccer game
      */
-    soccerStageControlDiv.addEventListener("click", function (event) {
+    soccerStateControlDiv.addEventListener("click", function (event) {
         switch(state.current){
             case state.getReady:
                 state.current = state.gameIn;
@@ -451,15 +453,16 @@ function fn_soccer() {
         else soccerBoard.style.display = "none";
     }
 
+
     /**
      * Function for showing soccer animation
      */
     function animation() {
         showInstruction();
         showBoard();
-        playerBlue.update();
-        playerRed.update();
-        ball.update();
+        playerBlue.updatePlayer();
+        playerRed.updatePlayer();
+        ball.updateBall();
         requestAnimationFrame(animation);
     }
     

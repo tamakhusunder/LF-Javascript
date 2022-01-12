@@ -1,0 +1,125 @@
+/* ******** game-soccer ******** */
+.game1{
+}
+
+.game-soccer{
+    background-color: #30CA72;
+    height: 100vh;
+}
+
+.game-soccer-top{
+    width: 1300px;
+    height: 500px;
+    margin: 0 auto;
+    background-color: cadetblue;
+    background-image: url("../assets/images/soccer/soccer-bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.soccer-border{
+    width: 850px;
+    height: 400px;
+    position: relative;
+    top: 50px;
+    margin: 0 auto;
+}
+
+.game-soccer-instruction,.game-soccer-winnerBoard{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 5px solid white;
+    border-radius: 30px;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    background-color: #E8E2B2;
+    padding: 5%;
+    text-align:  center;
+    display: none;
+}
+
+.game-soccer-instruction p{
+    font-size: 20px;
+}
+
+#soccer-winnerBoard-line2-img{
+    height: 100px;
+    background-image: url("../assets/images/winner.gif");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.game-soccer-entity-control{
+    position: absolute;
+    bottom: 10px;
+    height: 15%;
+    width: 100%;
+}
+
+#soccer-stage-control{
+    cursor: pointer;
+    position: absolute;
+    left: 60%;
+    height: 100%; 
+    margin-right: 5%;
+}
+
+#soccer-gotoHomePage{
+    cursor: pointer;
+    position: absolute;
+    left: 30%;
+    height: 100%; 
+}
+
+#soccer-stage-control:hover,#soccer-gotoHomePage:hover{
+    transform: scale(1.2); 
+}
+
+.soccerGoalPost{
+}
+
+.soccerBall{
+    background-image: url("../assets/images/soccer/ball.png");
+    background-size: contain;
+}
+
+.soccerBluePlayer{
+    background-image: url("../assets/images/soccer/blue.png");
+    background-size: contain;
+}
+
+.soccerRedPlayer{
+    background-image: url("../assets/images/soccer/red.png");
+    background-size: contain;
+}
+
+.gamer-soccer-points {
+    margin-top:1% ;
+    font-size: 30px;
+    color: white;
+    display: flex;
+    text-align: center;
+}
+
+.soccer-point-blue{
+    flex: 1;
+    background-color: rgb(40, 40, 173);
+    padding: 1%;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+.soccer-point-red{
+    flex: 1;
+    background-color: red;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 1%; 
+    border: 2px solid white;
+    border-radius: 20px;
+} 
+
+
