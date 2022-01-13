@@ -24,6 +24,8 @@ var whistleSound = new Audio('core/assets/audio/whistle.mp3');
  * Home Page Constants and variable
  */
 let clickHomeSoccerOnce = false;
+let clickHomeChickenOnce = false;
+let clickHomeSumoOnce = false;
 let clickHomeFishOnce = false;
 let homeBluePoint = 0;
 let homeRedPoint = 0;
@@ -33,6 +35,7 @@ let homeRedPoint = 0;
  * Function calling for running Home Page
  */
 let home = fn_homePage();
+// let home = fn_chicken();
 
 
 /**

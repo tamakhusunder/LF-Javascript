@@ -44,6 +44,45 @@
     font-size: 20px;
 }
 
+#chicken-winnerBoard-line2-img{
+    height: 100px;
+    background-image: url("../assets/images/winner.gif");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.game-chicken-entity-control{
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 45%;
+    height: 65px;
+    margin: 0 auto;
+}
+
+#chicken-gotoHomePage-btn{
+    float: left;
+    cursor: pointer;
+    width: 20%;
+    height: 100%;
+    background-image: url("../assets/images/home-btn.png");
+    background-size: 100% 100%;
+}
+
+#chicken-state-control-btn{
+    float: right;
+    cursor: pointer;
+    height: 100%;
+    width: 20%;
+    background-image: url("../assets/images/play.png");
+    background-size: 100% 100%;
+}
+
+#chicken-state-control-btn:hover,#chicken-gotoHomePage-btn:hover{
+    transform: scale(1.2); 
+}
+
 .chicken-blue-border{
     height: 250px;
     position: relative;
