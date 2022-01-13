@@ -24,7 +24,7 @@ function fn_catchTheFish() {
     const fishBoard = document.querySelector('.game-fish-winnerBoard');
     const fishBoardline1Div= document.getElementById('fish-winnerBoard-line1');
     const fishBoardline2Div= document.getElementById('fish-winnerBoard-line2');
-    const fisherBoardline2DivImg= document.getElementById('fish-winnerBoard-line2-img');
+    const fishBoardline2DivImg= document.getElementById('fish-winnerBoard-line2-img');
     const fishBluePointDiv = document.querySelector('.fish-point-blue');
     const fishRedPointDiv = document.querySelector('.fish-point-red');
     const fishEntityControlDiv = document.querySelector(".game-fish-entity-control");
@@ -277,7 +277,7 @@ function fn_catchTheFish() {
     });
 
 
-    /** shows or hide the Instruction div and Button entity of homepage and restart */
+    /** shows or hide the Instruction div and Button entity of homepage and restart button*/
     function showInstruction() {
         if (state.current === state.getReady){
             fishInstruction.style.display = "block";
@@ -287,7 +287,7 @@ function fn_catchTheFish() {
     }
 
 
-    /** shows or hide the winner div and Button entity of homepage and restart */
+    /** shows or hide the winner div and Button entity of homepage and restart button*/
     function showBoard() {
         if (state.current === state.gameOver){
             fishBoard.style.display = "block";
