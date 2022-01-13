@@ -14,11 +14,16 @@ const game2 = document.querySelector('.game2');
 const game3 = document.querySelector('.game3');
 const game4 = document.querySelector('.game4');
 
+
 /**
- * Accessing sound
+ * Accessing sound and img
  */
 var ballHitSound = new Audio('core/assets/audio/soccer/kick ball.wav');
 var whistleSound = new Audio('core/assets/audio/whistle.mp3');
+const playIconBtn = "url('core/assets/images/play.png')";
+const replayIconBtn = "url('core/assets/images/replay-btn.png')";
+const nextIconBtn = "url('../assets/images/next-btn.png')";
+
 
 /**
  * Home Page Constants and variable

@@ -144,6 +144,7 @@ function fn_sumo() {
                         sumoBoardLine1Div.innerHTML = "Red won the Game";
                         sumoBoardLine2Div.innerHTML = "";
                         sumoBoardLine2DivImg.style.display = "block";
+                        sumoStateControlDiv.style.backgroundImage = replayIconBtn;
                         sumoRedPoint = 0;
                         sumoBluePoint = 0;
                         state.current = state.gameOver;
@@ -153,6 +154,7 @@ function fn_sumo() {
                         sumoBoardLine1Div.innerHTML = "Blue Out of Ring";
                         sumoBoardLine2Div.innerHTML = "Red gains the Point";
                         sumoBoardLine2DivImg.style.display = "none";
+                        sumoStateControlDiv.style.backgroundImage = playIconBtn;
                         state.current = state.gameOver;
                     }
                 }
@@ -322,6 +324,7 @@ function fn_sumo() {
                         sumoBoardLine1Div.innerHTML = "Blue won the Game";
                         sumoBoardLine2Div.innerHTML = "";
                         sumoBoardLine2DivImg.style.display = "block";
+                        sumoStateControlDiv.style.backgroundImage = replayIconBtn;
                         sumoRedPoint = 0;
                         sumoBluePoint = 0;
                         state.current = state.gameOver;
@@ -331,6 +334,7 @@ function fn_sumo() {
                         sumoBoardLine1Div.innerHTML = "Red Out of Ring";
                         sumoBoardLine2Div.innerHTML = "Blue gains the Point";
                         sumoBoardLine2DivImg.style.display = "none";
+                        sumoStateControlDiv.style.backgroundImage = playIconBtn;
                         state.current = state.gameOver;
                     }
                 } 
@@ -482,6 +486,7 @@ function fn_sumo() {
         }
         else sumoBoard.style.display = "none";
     }
+
 
     /** Function of loop to show state of game and box animation*/
     function animationWithChangeState(){

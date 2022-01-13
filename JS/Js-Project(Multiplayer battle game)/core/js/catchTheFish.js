@@ -198,6 +198,7 @@ function fn_catchTheFish() {
                     fishBluePointDiv.innerHTML = fishBluePoint;
                     if (fishBluePoint === totalGamePoint){
                         fishBoardline1Div.innerHTML = "Blue won the Game";
+                        fishStateControlDiv.style.backgroundImage = replayIconBtn;
                         fishBluePoint = 0;
                         fishRedPoint = 0;
                         state.current = state.gameOver;
@@ -221,6 +222,7 @@ function fn_catchTheFish() {
                     fishRedPointDiv.innerHTML = fishRedPoint;
                     if (fishRedPoint === totalGamePoint){
                         fishBoardline1Div.innerHTML = "Red won the Game";
+                        fishStateControlDiv.style.backgroundImage = replayIconBtn;
                         fishRedPoint = 0;
                         fishBluePoint = 0;
                         state.current = state.gameOver;

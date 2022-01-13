@@ -38,12 +38,7 @@ function fn_soccer() {
     const soccerBoundaryHeight = 400;
     const soccerCenterX = soccerBoundaryWidth/2;    //425
     const soccerCenterY = soccerBoundaryHeight/2;   //200
-    const state = {
-        current : 0,
-        getReady : 0,
-        gameIn : 1,
-        gameOver : 2
-    }
+    let state;
     const extraAngle=20;
     let playerWidth = 80;
     let playerHeight = 80;
@@ -183,6 +178,7 @@ function fn_soccer() {
                     soccerBoardline1Div.innerHTML = "Red won the Game";
                     soccerBoardline2Div.innerHTML = "";
                     soccerBoardline2DivImg.style.display = "block";
+                    soccerStateControlDiv.style.backgroundImage = replayIconBtn;
                     soccerRedPoint = 0;
                     soccerBluePoint = 0;
                     state.current = state.gameOver;
@@ -192,6 +188,7 @@ function fn_soccer() {
                     soccerBoardline1Div.innerHTML = "Goal ! ! !";
                     soccerBoardline2Div.innerHTML = "Red gains the point.";
                     soccerBoardline2DivImg.style.display = "none";
+                    soccerStateControlDiv.style.backgroundImage = playIconBtn;
                     state.current = state.gameOver;
                 }
             }
@@ -203,6 +200,7 @@ function fn_soccer() {
                     soccerBoardline1Div.innerHTML = "Blue won the Game";
                     soccerBoardline2Div.innerHTML = "";
                     soccerBoardline2DivImg.style.display = "block";
+                    soccerStateControlDiv.style.backgroundImage = replayIconBtn;
                     soccerRedPoint = 0;
                     soccerBluePoint = 0;
                     state.current = state.gameOver;
@@ -212,6 +210,7 @@ function fn_soccer() {
                     soccerBoardline1Div.innerHTML = "Goal ! ! !";
                     soccerBoardline2Div.innerHTML = "Blue gains the point.";
                     soccerBoardline2DivImg.style.display = "none";
+                    soccerStateControlDiv.style.backgroundImage = playIconBtn;
                     state.current = state.gameOver;
                 }
             }
@@ -383,6 +382,12 @@ function fn_soccer() {
      * draw the instances of class for once only
      */
     if (clickHomeSoccerOnce === false){
+        state = {
+            current : 0,
+            getReady : 0,
+            gameIn : 1,
+            gameOver : 2
+        }
         goalPost1 = new GoalPost(10,100,(0-5),(soccerCenterY/2)+50);
         goalPost2 = new GoalPost(10,100,(soccerBoundaryWidth-10)+4,(soccerCenterY/2)+50);
         goalPost1.drawGoalPost();

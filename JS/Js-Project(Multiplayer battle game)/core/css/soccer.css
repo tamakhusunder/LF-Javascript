@@ -8,6 +8,7 @@
 }
 
 .game-soccer-top{
+    position: relative;
     width: 1300px;
     height: 500px;
     margin: 0 auto;
@@ -52,29 +53,36 @@
 
 .game-soccer-entity-control{
     position: absolute;
-    bottom: 10px;
-    height: 15%;
-    width: 100%;
-}
-
-#soccer-state-control{
-    cursor: pointer;
-    position: absolute;
-    left: 60%;
-    height: 100%; 
-    margin-right: 5%;
+    bottom: 7%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 55px;
+    margin: 0 auto;
 }
 
 #soccer-gotoHomePage{
+    float: left;
     cursor: pointer;
-    position: absolute;
-    left: 30%;
-    height: 100%; 
+    width: 20%;
+    height: 100%;
+    background-image: url("../assets/images/home-btn.png");
+    background-size: 100% 100%;
+}
+
+#soccer-state-control{
+    float: right;
+    cursor: pointer;
+    height: 100%;
+    width: 20%;
+    background-image: url("../assets/images/play.png");
+    background-size: 100% 100%;
 }
 
 #soccer-state-control:hover,#soccer-gotoHomePage:hover{
     transform: scale(1.2); 
 }
+
 
 .soccerGoalPost{
 }

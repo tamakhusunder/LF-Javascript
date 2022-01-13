@@ -203,6 +203,7 @@ function  fn_chicken() {
                             chickenBoardLine1Div.innerHTML = "Red won the Game";
                             chickenBoardLine2Div.innerHTML = "";
                             chickenBoardline2DivImg.style.display = "block";
+                            chickenStateControlDiv.style.backgroundImage = replayIconBtn;
                             chickenRedPoint = 0;
                             chickenBluePoint = 0;
                             state.current = state.gameOver;
@@ -212,6 +213,7 @@ function  fn_chicken() {
                             chickenBoardLine1Div.innerHTML = "Blue Crashed !!!";
                             chickenBoardLine2Div.innerHTML = "Red gains the Point";
                             chickenBoardline2DivImg.style.display = "none";
+                            chickenStateControlDiv.style.backgroundImage = playIconBtn;
                             state.current = state.gameOver;
                         }
                     }
@@ -225,6 +227,7 @@ function  fn_chicken() {
                             chickenBoardLine1Div.innerHTML = "Blue won the Game";
                             chickenBoardLine2Div.innerHTML = "";
                             chickenBoardline2DivImg.style.display = "block";
+                            chickenStateControlDiv.style.backgroundImage = replayIconBtn;
                             chickenRedPoint = 0;
                             chickenBluePoint = 0;
                             state.current = state.gameOver;
@@ -234,6 +237,7 @@ function  fn_chicken() {
                             chickenBoardLine1Div.innerHTML = "Red Crashed !!!";
                             chickenBoardLine2Div.innerHTML = "Blue gains the Point";
                             chickenBoardline2DivImg.style.display = "none";
+                            chickenStateControlDiv.style.backgroundImage = playIconBtn;
                             state.current = state.gameOver;
                         }
                     }
