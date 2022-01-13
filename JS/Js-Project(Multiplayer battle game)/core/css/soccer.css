@@ -57,7 +57,7 @@
     width: 100%;
 }
 
-#soccer-stage-control{
+#soccer-state-control{
     cursor: pointer;
     position: absolute;
     left: 60%;
@@ -72,7 +72,7 @@
     height: 100%; 
 }
 
-#soccer-stage-control:hover,#soccer-gotoHomePage:hover{
+#soccer-state-control:hover,#soccer-gotoHomePage:hover{
     transform: scale(1.2); 
 }
 

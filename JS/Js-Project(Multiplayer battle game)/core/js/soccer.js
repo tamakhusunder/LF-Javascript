@@ -18,8 +18,6 @@ function fn_soccer() {
     /**
      * Accessing DOM of Soccer game
      */
-    const soccerEntityControlDiv = document.querySelector(".game-soccer-entity-control");
-    const soccerStateControlDiv = document.getElementById("soccer-stage-control");
     const soccer = document.querySelector('.game-soccer-top');
     const soccerBoundary = document.querySelector('.soccer-border');
     const soccerInstruction = document.querySelector('.game-soccer-instruction');
@@ -29,7 +27,9 @@ function fn_soccer() {
     const soccerBoardline2DivImg= document.getElementById('soccer-winnerBoard-line2-img');
     const soccerBluePointDiv = document.querySelector('.soccer-point-blue');
     const soccerRedPointDiv = document.querySelector('.soccer-point-red');
-
+    const soccerEntityControlDiv = document.querySelector(".game-soccer-entity-control");
+    const soccerStateControlDiv = document.getElementById("soccer-state-control");
+    
 
     /**
      * Soccer Game Constants and variable
@@ -405,7 +405,7 @@ function fn_soccer() {
     
 
     /**
-     * Click event for switching 3 stage of screen of soccer game
+     * Click event for switching 3 state of screen of soccer game
      */
     soccerStateControlDiv.addEventListener("click", function (event) {
         switch(state.current){
