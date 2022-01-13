@@ -4,6 +4,9 @@
 function fn_catchTheFish() {
     homePage.style.display = "none";
     game4.style.display = "block";
+    game1.style.display = "none";
+    game2.style.display = "none";
+    game3.style.display = "none";
 
 
     /**
@@ -13,6 +16,15 @@ function fn_catchTheFish() {
     gotoHomepage.addEventListener('click', function (event) {
         let homepage = fn_homePage();
     });
+
+
+    /**
+     * Event handler for switching to next game(Soccer)
+     */
+     const fishToNextGameDiv = document.getElementById("fish-to-next-game-btn");
+     fishToNextGameDiv.addEventListener('click', function (event) {
+         let nextGame = fn_soccer();
+     });
 
 
     /**
@@ -36,15 +48,15 @@ function fn_catchTheFish() {
      */
     const fishBoundaryWidth = 800;
     const fishBoundaryHeight = 400;
-    const fishGameCenterX = fishBoundaryWidth/2;    //400
-    const fishGameCenterY = fishBoundaryHeight/2;   //200
+    const fishGameCenterX = fishBoundaryWidth/2;    
+    const fishGameCenterY = fishBoundaryHeight/2;   
     let state;
     let playerHandWidth = 110;
     let playerHandHeight = 190;
     let playerRadius = playerHandHeight/2;
-    let initialBlueX = fishGameCenterX - playerHandWidth/2;     //350
-    let initialBlueY =  fishGameCenterY + 90;   //290
-    let extendBlueHandHeight = fishGameCenterY + 20;   //220
+    let initialBlueX = fishGameCenterX - playerHandWidth/2;     
+    let initialBlueY =  fishGameCenterY + 90;   
+    let extendBlueHandHeight = fishGameCenterY + 20;   
     let initialRedX = initialBlueX;
     let initialRedY = initialBlueY
     let extendRedHandHeight = extendBlueHandHeight;
@@ -78,6 +90,7 @@ function fn_catchTheFish() {
             this.fixedY = this.y;
         }
 
+
         drawFish() {
             this.fishElement = document.createElement('img');
             this.fishElement.src = fishImgArray[this.imgIndex]
@@ -90,8 +103,8 @@ function fn_catchTheFish() {
             setTimeout(() => {
                 fishGameBoundaryDiv.appendChild(this.fishElement);
             },1000);
-            
         }
+
 
         updateAlternateFishDisplay() {
             let i=0;
@@ -144,6 +157,7 @@ function fn_catchTheFish() {
             });
         }
 
+
         drawHand() {
             this.handElement = document.createElement("img");
             this.handElement.src = this.img;
@@ -155,6 +169,7 @@ function fn_catchTheFish() {
             this.handElement.style[this.propertyName] = this.y + "px";
             fishGameBoundaryDiv.appendChild(this.handElement); 
         }
+
 
         handMovement(){ 
                 let upTimerId = setInterval(() => {
@@ -179,9 +194,9 @@ function fn_catchTheFish() {
                     this.y -= this.velocity;
                     this.handElement.style[this.propertyName] = this.y + 'px';
                 },20);
-            
         }
         
+
         checkHandFishCollision(){
             //collision condition for blue hand
             if (this.propertyName === 'bottom'){
@@ -199,13 +214,16 @@ function fn_catchTheFish() {
                     if (fishBluePoint === totalGamePoint){
                         fishBoardline1Div.innerHTML = "Blue won the Game";
                         fishStateControlDiv.style.backgroundImage = replayIconBtn;
+                        fishToNextGameDiv.style.display = "block";
                         fishBluePoint = 0;
                         fishRedPoint = 0;
+                        winSound.play();
                         state.current = state.gameOver;
                         homeBluePoint++;
                     }
                 }
             }
+
 
             //collision condition for red hand
             if (this.propertyName === 'top'){
@@ -223,14 +241,15 @@ function fn_catchTheFish() {
                     if (fishRedPoint === totalGamePoint){
                         fishBoardline1Div.innerHTML = "Red won the Game";
                         fishStateControlDiv.style.backgroundImage = replayIconBtn;
+                        fishToNextGameDiv.style.display = "block";
                         fishRedPoint = 0;
                         fishBluePoint = 0;
+                        winSound.play();
                         state.current = state.gameOver;
                         homeRedPoint++;
                     }
                 }
             }
-
         }
     }
 
@@ -275,7 +294,7 @@ function fn_catchTheFish() {
                 break;
             default: 
         }
-        if(state.current === state.gameIn)  whistleSound.play();
+        if(state.current === state.gameIn)  catSound.play();
     });
 
 
@@ -296,7 +315,10 @@ function fn_catchTheFish() {
             fishEntityControlDiv.style.display = "block";
 
         }
-        else fishBoard.style.display = "none";
+        else{
+            fishBoard.style.display = "none";
+            fishToNextGameDiv.style.display = "none";
+        }
     }
      
 
@@ -309,6 +331,4 @@ function fn_catchTheFish() {
 
 
     animationWithChangeState();
-
-
 }

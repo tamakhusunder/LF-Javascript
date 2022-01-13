@@ -4,6 +4,9 @@
 function fn_soccer() {
     homePage.style.display = "none";
     game1.style.display = "block";
+    game2.style.display = "none";
+    game3.style.display = "none";
+    game4.style.display = "none";
 
 
     /**
@@ -13,6 +16,16 @@ function fn_soccer() {
     gotoHomepage.addEventListener('click', function (event) {
         let homepage = fn_homePage();
     });
+
+
+    /**
+     * Event handler for switching to next game(Chicken Jump)
+     */
+     const soccerToNextGameDiv = document.getElementById("soccer-to-next-game-btn");
+     soccerToNextGameDiv.addEventListener('click', function (event) {
+         let nextGame = fn_chicken();
+     });
+ 
 
 
     /**
@@ -36,8 +49,8 @@ function fn_soccer() {
      */
     const soccerBoundaryWidth = 850;
     const soccerBoundaryHeight = 400;
-    const soccerCenterX = soccerBoundaryWidth/2;    //425
-    const soccerCenterY = soccerBoundaryHeight/2;   //200
+    const soccerCenterX = soccerBoundaryWidth/2;  
+    const soccerCenterY = soccerBoundaryHeight/2;  
     let state;
     const extraAngle=20;
     let playerWidth = 80;
@@ -70,6 +83,7 @@ function fn_soccer() {
             this.y = y;
         }
 
+
         drawGoalPost() {
             this.goalPostElement = document.createElement('div');
             this.goalPostElement.classList.add("soccerGoalPost");
@@ -100,6 +114,7 @@ function fn_soccer() {
             this.initialY = soccerCenterY-(this.height/2);
         }
 
+
         drawBall() {
                 this.ballElement = document.createElement('div');
                 this.ballElement.classList.add("soccerBall");
@@ -111,6 +126,7 @@ function fn_soccer() {
                 this.ballElement.style.borderRadius = 50 + '%';
                 soccerBoundary.appendChild(this.ballElement);
         }
+
 
         updateBall() {
             if (state.current == state.gameIn){ 
@@ -136,6 +152,7 @@ function fn_soccer() {
             }
         }
 
+
         rotateBall() {
                 if((this.angleIt+1)%(360+2) == 0){
                     this.angleIt=0;
@@ -145,6 +162,7 @@ function fn_soccer() {
                 this.ballElement.style.transform=`rotate(${this.angle}deg)`;
             
         }
+
 
         checkBallPlayerCollisionForRoll(){
                 let dist1 = getDistance(this.x,this.y,playerBlue.x,playerBlue.y)
@@ -167,6 +185,7 @@ function fn_soccer() {
                 }
         }
 
+
         checkGoalPostCollision(){
             soccerRedPointDiv.innerHTML = soccerRedPoint;
             soccerBluePointDiv.innerHTML = soccerBluePoint;
@@ -179,8 +198,10 @@ function fn_soccer() {
                     soccerBoardline2Div.innerHTML = "";
                     soccerBoardline2DivImg.style.display = "block";
                     soccerStateControlDiv.style.backgroundImage = replayIconBtn;
+                    soccerToNextGameDiv.style.display = "block";
                     soccerRedPoint = 0;
                     soccerBluePoint = 0;
+                    winSound.play();
                     state.current = state.gameOver;
                     homeRedPoint++;
                 }
@@ -201,8 +222,10 @@ function fn_soccer() {
                     soccerBoardline2Div.innerHTML = "";
                     soccerBoardline2DivImg.style.display = "block";
                     soccerStateControlDiv.style.backgroundImage = replayIconBtn;
+                    soccerToNextGameDiv.style.display = "block";
                     soccerRedPoint = 0;
                     soccerBluePoint = 0;
+                    winSound.play();
                     state.current = state.gameOver;
                     homeBluePoint++;
                 }
@@ -215,6 +238,7 @@ function fn_soccer() {
                 }
             }
         }
+
 
         reset(){
             this.x = this.initialX;
@@ -244,6 +268,7 @@ function fn_soccer() {
             this.initialX = x;
             this.initialY = y;
 
+
             //player control event with key A and L
             document.addEventListener('keydown',(event) =>{
                 if(event.code == this.key){
@@ -257,8 +282,8 @@ function fn_soccer() {
                     
                 }
             });
-
         }
+
 
         drawPlayer() {
             this.playerElement = document.createElement('div');
@@ -270,13 +295,14 @@ function fn_soccer() {
             this.playerElement.style.top = this.y + 'px';
             this.playerElement.style.borderRadius =  50 + '%';
             soccerBoundary.appendChild(this.playerElement);
-            
         }
+
 
         updatePlayer(){
             if( state.current == state.gameIn)
             this.limitPlayerToBoundarywithMovement() ; 
         }
+
 
         limitPlayerToBoundarywithMovement(){
             if (this.x > soccerBoundaryWidth-this.width){
@@ -303,6 +329,7 @@ function fn_soccer() {
             else this.rotatePlayer();   
         }
 
+
         rotatePlayer(){
             if((this.angleIt+1)%(360+2) == 0){
                 this.angleIt=0;
@@ -311,6 +338,7 @@ function fn_soccer() {
             this.angleIt++;
             this.playerElement.style.transform=`rotate(${this.angle}deg)`;
         }
+
 
         //move player in all direction
         movePlayer(){
@@ -370,6 +398,7 @@ function fn_soccer() {
             }
         }
 
+
         reset(){
             this.x = this.initialX;
             this.y = this.initialY;
@@ -377,6 +406,7 @@ function fn_soccer() {
             this.playerElement.style.top = this.y + "px";
         }
     }
+
 
     /**
      * draw the instances of class for once only
@@ -393,8 +423,10 @@ function fn_soccer() {
         goalPost1.drawGoalPost();
         goalPost2.drawGoalPost();
 
+
         ball = new Ball();
         ball.drawBall();
+
 
         playerBlue = new Player(playerWidth,playerHeight,initialBlueX,initialBlueY,'soccerBluePlayer','KeyA',1,velocity,walk);
         playerRed = new Player(playerWidth,playerHeight,initialRedX,initialRedY,'soccerRedPlayer','KeyL',-1,velocity,walk);
@@ -455,7 +487,10 @@ function fn_soccer() {
             soccerBoard.style.display = "block";
             soccerEntityControlDiv.style.display = "block";
         }
-        else soccerBoard.style.display = "none";
+        else{
+            soccerBoard.style.display = "none";
+            soccerToNextGameDiv.style.display = "none";
+        }
     }
 
 
@@ -473,5 +508,4 @@ function fn_soccer() {
     
     
     animation();
-
 }

@@ -16,22 +16,30 @@ const game4 = document.querySelector('.game4');
 
 
 /**
- * Accessing sound and img
+ * Accessing sound and images
  */
-var ballHitSound = new Audio('core/assets/audio/soccer/kick ball.wav');
-var whistleSound = new Audio('core/assets/audio/whistle.mp3');
+var whistleSound = new Audio('core/assets/audio/soccer/whistle.mp3');
+var chickenSound = new Audio('core/assets/audio/chickenRun/chick.mp3');
+var drumSound = new Audio('core/assets/audio/sumo/drum.wav');
+var catSound = new Audio('core/assets/audio/catchTheFish/cat.wav');
+var winSound = new Audio('core/assets/audio/win.wav');
 const playIconBtn = "url('core/assets/images/play.png')";
 const replayIconBtn = "url('core/assets/images/replay-btn.png')";
 const nextIconBtn = "url('../assets/images/next-btn.png')";
 
 
 /**
- * Home Page Constants and variable
+ * Home Page variable(Use while making class instance for once only)
  */
 let clickHomeSoccerOnce = false;
 let clickHomeChickenOnce = false;
 let clickHomeSumoOnce = false;
 let clickHomeFishOnce = false;
+
+
+/**
+ * Variable for home page
+ */
 let homeBluePoint = 0;
 let homeRedPoint = 0;
 
@@ -40,7 +48,6 @@ let homeRedPoint = 0;
  * Function calling for running Home Page
  */
 let home = fn_homePage();
-// let home = fn_chicken();
 
 
 /**
@@ -58,10 +65,13 @@ homeSumoBtn.addEventListener('click', function (event) {
 homeFishBtn.addEventListener('click', function (event) {
     let game4 = fn_catchTheFish();
 });
+homePlayBtn.addEventListener('click', function (event) {
+    let playGame = fn_soccer();
+});
 
 
 /**
- * Fuction for Home Page
+ * Fuction for Home Page with home score points
  */
 function fn_homePage() {
     homePage.style.display = "block";
@@ -69,7 +79,6 @@ function fn_homePage() {
     game2.style.display = "none";
     game3.style.display = "none";
     game4.style.display = "none";
-
     homeBluePointDiv.innerHTML = homeBluePoint;
     homeRedPointDiv.innerHTML = homeRedPoint;
 }

@@ -1,8 +1,5 @@
 
 /* ******** game-sumo ******** */
-.game3{
-}
-
 .game-sumo{
     background-color: green;
     background-color: #FEEF9A;
@@ -113,3 +110,24 @@
     border: 2px solid white;
     border-radius: 20px;
 } 
+
+.game-sumo-bottom{
+    position: relative;
+}
+
+#sumo-to-next-game-btn{
+    cursor: pointer;
+    position: absolute;
+    top: 0%;
+    left: 48%;
+    width: 5%;
+    height: 90%;
+    background-image: url('../assets/images/next-btn.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#sumo-to-next-game-btn:hover{
+    transform: scale(1.2); 
+}
+

@@ -4,15 +4,27 @@
 function  fn_chicken() {
     homePage.style.display = "none";
     game2.style.display = "block";
+    game1.style.display = "none";
+    game3.style.display = "none";
+    game4.style.display = "none";
 
 
-      /**
+    /**
      * Event handler for back to home page
      */
-       gotoHomepage = document.getElementById("chicken-gotoHomePage-btn");
-       gotoHomepage.addEventListener('click', function (event) {
-           let homepage = fn_homePage();
-       });
+    gotoHomepage = document.getElementById("chicken-gotoHomePage-btn");
+    gotoHomepage.addEventListener('click', function (event) {
+        let homepage = fn_homePage();
+    });
+    
+
+    /**
+     * Event handler for switching to next game(sumo wrestling)
+     */
+    const chickenToNextGameDiv = document.getElementById("chicken-to-next-game-btn");
+    chickenToNextGameDiv.addEventListener('click', function (event) {
+        let nextGame = fn_sumo();
+    });
 
         
     /**
@@ -39,11 +51,11 @@ function  fn_chicken() {
     const chickenGameBoundaryWidth = 800;
     const chickenGameBoundaryHeight = 250;
     const chickenGameSkyHeight = 220;
-    const chickenGameFooterHeight = chickenGameBoundaryHeight-chickenGameSkyHeight; //30
+    const chickenGameFooterHeight = chickenGameBoundaryHeight-chickenGameSkyHeight;
     const chickenWidth = 50;
     const chickenHeight = 60;
     const chickenX = 2;
-    const chickenBlueY = chickenGameSkyHeight - chickenHeight; //170
+    const chickenBlueY = chickenGameSkyHeight - chickenHeight;
     const jumpHeightBLueY = chickenBlueY - 130;
     const keyBlue = "KeyA";
     let chickenBluePoint = 0;
@@ -204,8 +216,10 @@ function  fn_chicken() {
                             chickenBoardLine2Div.innerHTML = "";
                             chickenBoardline2DivImg.style.display = "block";
                             chickenStateControlDiv.style.backgroundImage = replayIconBtn;
+                            chickenToNextGameDiv.style.display = "block";
                             chickenRedPoint = 0;
                             chickenBluePoint = 0;
+                            winSound.play();
                             state.current = state.gameOver;
                             homeRedPoint++;
                         }
@@ -228,8 +242,10 @@ function  fn_chicken() {
                             chickenBoardLine2Div.innerHTML = "";
                             chickenBoardline2DivImg.style.display = "block";
                             chickenStateControlDiv.style.backgroundImage = replayIconBtn;
+                            chickenToNextGameDiv.style.display = "block";
                             chickenRedPoint = 0;
                             chickenBluePoint = 0;
+                            winSound.play();
                             state.current = state.gameOver;
                             homeBluePoint++;
                         }
@@ -311,7 +327,7 @@ function  fn_chicken() {
                 break;
             default: 
         }
-        if(state.current === state.gameIn)  whistleSound.play();
+        if(state.current === state.gameIn)  chickenSound.play();
     });
 
 
@@ -331,7 +347,10 @@ function  fn_chicken() {
             chickenBoard.style.display = "block";
             chickenEntityControlDiv.style.display = "block";
         }
-        else chickenBoard.style.display = "none";
+        else{ 
+            chickenBoard.style.display = "none";
+            chickenToNextGameDiv.style.display = "none";
+        }
     }
 
 

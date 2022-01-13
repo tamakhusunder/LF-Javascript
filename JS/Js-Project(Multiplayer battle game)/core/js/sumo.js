@@ -4,6 +4,9 @@
 function fn_sumo() {
     homePage.style.display = "none";
     game3.style.display = "block";
+    game1.style.display = "none";
+    game2.style.display = "none";
+    game4.style.display = "none";
 
 
     /**
@@ -13,6 +16,15 @@ function fn_sumo() {
      gotoHomepage.addEventListener('click', function (event) {
          let homepage = fn_homePage();
      });
+
+
+     /**
+     * Event handler for switching to next game(Catch The Fish)
+     */
+    const sumoToNextGameDiv = document.getElementById("sumo-to-next-game-btn");
+    sumoToNextGameDiv.addEventListener('click', function (event) {
+        let nextGame = fn_catchTheFish();
+    });
 
 
      /**
@@ -145,8 +157,10 @@ function fn_sumo() {
                         sumoBoardLine2Div.innerHTML = "";
                         sumoBoardLine2DivImg.style.display = "block";
                         sumoStateControlDiv.style.backgroundImage = replayIconBtn;
+                        sumoToNextGameDiv.style.display = "block";
                         sumoRedPoint = 0;
                         sumoBluePoint = 0;
+                        winSound.play();
                         state.current = state.gameOver;
                         homeRedPoint++;
                     }
@@ -325,8 +339,10 @@ function fn_sumo() {
                         sumoBoardLine2Div.innerHTML = "";
                         sumoBoardLine2DivImg.style.display = "block";
                         sumoStateControlDiv.style.backgroundImage = replayIconBtn;
+                        sumoToNextGameDiv.style.display = "block";
                         sumoRedPoint = 0;
                         sumoBluePoint = 0;
+                        winSound.play();
                         state.current = state.gameOver;
                         homeBluePoint++;
                     }
@@ -464,7 +480,7 @@ function fn_sumo() {
                 break;
             default: 
         }
-        if(state.current === state.gameIn)  whistleSound.play();
+        if(state.current === state.gameIn)  drumSound.play();
     });
 
 
@@ -484,7 +500,10 @@ function fn_sumo() {
             sumoBoard.style.display = "block";
             sumoEntityControlDiv.style.display = "block";
         }
-        else sumoBoard.style.display = "none";
+        else{
+            sumoBoard.style.display = "none";
+            sumoToNextGameDiv.style.display = "none";
+        }
     }
 
 
@@ -497,5 +516,6 @@ function fn_sumo() {
         requestAnimationFrame(animationWithChangeState);
     }
 
+    
     animationWithChangeState();
 }
