@@ -10,6 +10,7 @@
 }
 
 .game-sumo-top{
+    position: relative;
     width: 1300px;
     height: 500px;
     margin: 0 auto;
@@ -29,7 +30,7 @@
 }
 
 .game-sumo-instruction,.game-sumo-winnerBoard{
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 50%;
     border: 5px solid white;
@@ -44,6 +45,45 @@
 
 .game-sumo-instruction p{
     font-size: 20px;
+}
+
+#sumo-winnerBoard-line2-img{
+    height: 100px;
+    background-image: url("../assets/images/winner.gif");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.game-sumo-entity-control{
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 55px;
+    margin: 0 auto;
+}
+
+#sumo-gotoHomePage-btn{
+    float: left;
+    cursor: pointer;
+    width: 20%;
+    height: 100%;
+    background-image: url("../assets/images/home-btn.png");
+    background-size: 100% 100%;
+}
+
+#sumo-state-control-btn{
+    float: right;
+    cursor: pointer;
+    height: 100%;
+    width: 20%;
+    background-image: url("../assets/images/play.png");
+    background-size: 100% 100%;
+}
+
+#sumo-state-control-btn:hover,#sumo-gotoHomePage-btn:hover{
+    transform: scale(1.2); 
 }
 
 .gamer-sumo-points {
