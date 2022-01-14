@@ -12,10 +12,10 @@ function fn_sumo() {
     /**
      * Event handler for back to home page
      */
-     gotoHomepage = document.getElementById("sumo-gotoHomePage-btn");
-     gotoHomepage.addEventListener('click', function (event) {
-         let homepage = fn_homePage();
-     });
+    const gotoHomepage = document.getElementById("sumo-gotoHomePage-btn");
+    gotoHomepage.addEventListener('click', function (event) {
+        let homepage = fn_homePage();
+    });
 
 
      /**

@@ -12,7 +12,7 @@ function  fn_chicken() {
     /**
      * Event handler for back to home page
      */
-    gotoHomepage = document.getElementById("chicken-gotoHomePage-btn");
+    const gotoHomepage = document.getElementById("chicken-gotoHomePage-btn");
     gotoHomepage.addEventListener('click', function (event) {
         let homepage = fn_homePage();
     });
@@ -161,15 +161,15 @@ function  fn_chicken() {
     /** Class representing for Box(obstacle). */
     class Box{
         constructor(x,y,color){
-        this.x = x;
-        this.y = y;
-        this.width = 50;
-        this.height = 50;
-        this.speed = 10;
-        this.color = color;
-        this.frame = 1;
-        this.initialX = x;
-        this.initialY = y;
+            this.x = x;
+            this.y = y;
+            this.width = 50;
+            this.height = 50;
+            this.speed = 10;
+            this.color = color;
+            this.frame = 1;
+            this.initialX = x;
+            this.initialY = y;
         }
 
         
@@ -187,7 +187,7 @@ function  fn_chicken() {
         }
 
 
-        update() {
+        updateBoxMovement() {
             if (state.current == state.gameIn){ 
                 if ( this.x < 0-this.width){
                     this.x = (Math.random() < 0.5 ? 800 : 900);
@@ -358,9 +358,9 @@ function  fn_chicken() {
     function animationWithChangeState() {
         showInstruction();
         showBoard();
-        box1.update();
+        box1.updateBoxMovement();
         box1.checkChickenBoxCollision();
-        box2.update();
+        box2.updateBoxMovement();
         box2.checkChickenBoxCollision();
         requestAnimationFrame(animationWithChangeState);
     }

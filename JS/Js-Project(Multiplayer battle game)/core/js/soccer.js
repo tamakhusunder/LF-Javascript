@@ -12,7 +12,7 @@ function fn_soccer() {
     /**
      * Event handler for back to home page
      */
-    gotoHomepage = document.getElementById("soccer-gotoHomePage");
+    const gotoHomepage = document.getElementById("soccer-gotoHomePage");
     gotoHomepage.addEventListener('click', function (event) {
         let homepage = fn_homePage();
     });

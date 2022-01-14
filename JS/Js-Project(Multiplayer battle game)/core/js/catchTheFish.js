@@ -12,7 +12,7 @@ function fn_catchTheFish() {
     /**
      * Event handler for back to home page
      */
-    gotoHomepage = document.getElementById("fish-gotoHomePage-btn");
+    const gotoHomepage = document.getElementById("fish-gotoHomePage-btn");
     gotoHomepage.addEventListener('click', function (event) {
         let homepage = fn_homePage();
     });
