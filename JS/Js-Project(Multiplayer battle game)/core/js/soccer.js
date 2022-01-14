@@ -160,7 +160,6 @@ function fn_soccer() {
                 this.angle = this.angleIt;
                 this.angleIt++;
                 this.ballElement.style.transform=`rotate(${this.angle}deg)`;
-            
         }
 
 
